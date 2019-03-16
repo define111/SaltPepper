@@ -51,9 +51,8 @@ class EventsController extends Controller
             ]
           ];
         }
-        $jsonFile1=json_encode($jsonFile);
         // return($geojson);
-        return view ('events.index')->with('events', $events)->with('jsonFile1', $jsonFile1);
+        return view ('events.index')->with('events', $events)->with('jsonFile', $jsonFile);
 
         //Create a geojson for showing the events on the map
     }

@@ -51,10 +51,15 @@ function createListingsMap(options) {
     ====================================================
     */
     console.log(settings.jsonFile);
-    var test=JSON.parse(settings.jsonFile);
+    // var test=JSON.parse(settings.jsonFile);
+    // console.log(test);
+    // var test=JSON.stringify(settings.jsonFile);
+    var test=settings.jsonFile;
     console.log(test);
 
-    $.getJSON(test).done(function (test) {
+    // $.getJSON(test).done(function (test) {
+    var getJSON = function() {
+      var test=settings.jsonFile;
             L.geoJSON(test, {
                 pointToLayer: pointToLayer,
                 onEachFeature: onEachFeature
@@ -64,11 +69,11 @@ function createListingsMap(options) {
                 var featureGroup = new L.featureGroup(markersGroup);
                 map.fitBounds(featureGroup.getBounds());
             }
-
-        })
-        .fail(function (jqxhr, textStatus, error) {
-            console.log(error);
-        });
+    };
+        // })
+        // .fail(function (jqxhr, textStatus, error) {
+        //     console.log(error);
+        // });
 
     /*
     ====================================================

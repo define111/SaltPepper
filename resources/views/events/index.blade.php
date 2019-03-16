@@ -422,8 +422,7 @@
 <script>
   createListingsMap({
       mapId: 'categorySideMap',
-      jsonFile: {!! json_encode($jsonFile1, JSON_HEX_TAG) !!}
-      // jsonFile: 'js/restaurants-geojson.json'
+      jsonFile: {!! json_encode($jsonFile, JSON_HEX_TAG) !!}
   });
 </script>
 
