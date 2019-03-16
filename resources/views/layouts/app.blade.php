@@ -65,8 +65,6 @@
         @yield('content')
         @include('inc.footer')
       {{-- Script for bootstrap --}}
-     <!-- jQuery-->
-     <script src="https://d19m59y37dris4.cloudfront.net/directory/1-0/vendor/jquery/jquery.min.js"></script>
      <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
      <script src="https://d19m59y37dris4.cloudfront.net/directory/1-0/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
      <!-- Magnific Popup - Lightbox for the gallery-->

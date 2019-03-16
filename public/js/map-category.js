@@ -50,9 +50,12 @@ function createListingsMap(options) {
       about the listings
     ====================================================
     */
+    console.log(settings.jsonFile);
+    var test=JSON.parse(settings.jsonFile);
+    console.log(test);
 
-    $.getJSON(settings.jsonFile).done(function (json) {
-            L.geoJSON(json, {
+    $.getJSON(test).done(function (test) {
+            L.geoJSON(test, {
                 pointToLayer: pointToLayer,
                 onEachFeature: onEachFeature
             }).addTo(map);

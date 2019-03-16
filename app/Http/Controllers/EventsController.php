@@ -17,7 +17,45 @@ class EventsController extends Controller
         $events = Event::with('user')->paginate(10);
         // $events = Event::orderBy('created_at','asc')->paginate(10);
         // echo $events->user->name;
-        return view ('events.index')->with('events', $events);
+        //Create a geojson for showing the events on the map
+        $jsonFile =["type" => "FeatureCollection", "features" => []];
+        foreach ($events as $key => $event) {
+          $jsonFile['features'][$key] = [
+            "type" => "Feature",
+            "geometry" => [
+              "type" => "Point",
+              "coordinates" => [
+                11.576124,
+                48.137154
+              ]
+            ],
+            "properties" => [
+              "id" => "59c0c8e33b1527bfe2abaf92",
+              "index" => 0,
+              "isActive" => true,
+              "logo" => "http =>//placehold.it/32x32",
+              "image" => "restaurant-1430931071372-38127bd472b8.jpg",
+              "link" => "detail.html",
+              "url" => "#",
+              "name" => "Blue Hills",
+              "category" => "Restaurants",
+              "email" => "biancabriggs@bluehill.com",
+              "stars" => 4,
+              "phone" => "+1 (920) 407-3975",
+              "address" => "151 Karweg Place, Waumandee, Iowa, 5508",
+              "about" => "Cupidatat excepteur non dolore laborum et quis nostrud veniam dolore deserunt. Pariatur dolore ut in elit id nulla. Irure nostrud sint deserunt enim Lorem. Do eu esse consequat mollit labore commodo officia labore voluptate sit voluptate cupidatat.\r\n",
+              "tags" => [
+                "Restaurant",
+                "Contemporary"
+              ]
+            ]
+          ];
+        }
+        $jsonFile1=json_encode($jsonFile);
+        // return($geojson);
+        return view ('events.index')->with('events', $events)->with('jsonFile1', $jsonFile1);
+
+        //Create a geojson for showing the events on the map
     }
 
     /**
@@ -81,11 +119,11 @@ class EventsController extends Controller
     $event->number_of_persons = $request->input('number_of_persons');
     $event->description = $request->input('description');
     $event->tags = $request->input('tags');
-
     //add the coordinates for the map
     $address = $event->address;
     $address = str_replace(" ", "+", $address);
     $city = $event->city;
+    $event->user_id = auth()->user()->id;
     // Create a stream
     $opts = array('http'=>array('header'=>"User-Agent: StevesCleverAddressScript 3.7.6\r\n"));
     $context = stream_context_create($opts);
@@ -96,7 +134,6 @@ class EventsController extends Controller
     $event->coordinate_lat = $nominatim1[0]->lat;
     $event->coordinate_lon = $nominatim1[0]->lon;
     //
-    // $event->user_id = auth()->user()->id;
     // $event->background_image = $fileNameToStore;
     $event->save();
 

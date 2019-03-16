@@ -171,7 +171,7 @@
                   <input type="hidden" name="priceto" id="slider-snap-input-to" value="110">
                 </div>
                 <div class="col-xl-6 mb-4">
-                  <label class="form-label">Vegetarians</label>
+                  <label class="form-label">Vegans</label>
                   <ul class="list-inline mb-0">
                     <li class="list-inline-item">
                       <div class="custom-control custom-radio">
@@ -422,7 +422,8 @@
 <script>
   createListingsMap({
       mapId: 'categorySideMap',
-      jsonFile: 'js/restaurants-geojson.json'
+      jsonFile: {!! json_encode($jsonFile1, JSON_HEX_TAG) !!}
+      // jsonFile: 'js/restaurants-geojson.json'
   });
 </script>
 
