@@ -422,7 +422,7 @@
 <script>
   createListingsMap({
       mapId: 'categorySideMap',
-      jsonFile: {!! json_encode($jsonFile, JSON_HEX_TAG) !!}
+      jsonEvents: {!! json_encode($jsonEvents, JSON_HEX_TAG) !!}
   });
 </script>
 

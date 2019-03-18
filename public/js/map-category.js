@@ -46,37 +46,6 @@ function createListingsMap(options) {
 
     /*
     ====================================================
-      Load GeoJSON file with the data
-      about the listings
-    ====================================================
-    */
-    console.log(settings.jsonFile);
-    // var test=JSON.parse(settings.jsonFile);
-    // console.log(test);
-    // var test=JSON.stringify(settings.jsonFile);
-    var test=settings.jsonFile;
-    console.log(test);
-
-    // $.getJSON(test).done(function (test) {
-    var getJSON = function() {
-      var test=settings.jsonFile;
-            L.geoJSON(test, {
-                pointToLayer: pointToLayer,
-                onEachFeature: onEachFeature
-            }).addTo(map);
-
-            if (markersGroup) {
-                var featureGroup = new L.featureGroup(markersGroup);
-                map.fitBounds(featureGroup.getBounds());
-            }
-    };
-        // })
-        // .fail(function (jqxhr, textStatus, error) {
-        //     console.log(error);
-        // });
-
-    /*
-    ====================================================
       Bind popup and highlighting features
       to each marker
     ====================================================
@@ -97,6 +66,21 @@ function createListingsMap(options) {
         popupAnchor: [0, -18],
         tooltipAnchor: [0, 19]
     });
+    /*
+    ====================================================
+      Load GeoJSON file with the data
+      about the listings
+    ====================================================
+    */
+    L.geoJSON(settings.$jsonEvents, {
+        pointToLayer: pointToLayer,
+        onEachFeature: onEachFeature
+    }).addTo(map);
+
+    if (markersGroup) {
+        var featureGroup = new L.featureGroup(markersGroup);
+        map.fitBounds(featureGroup.getBounds());
+    }
 
     function onEachFeature(feature, layer) {
 

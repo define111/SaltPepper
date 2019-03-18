@@ -18,15 +18,15 @@ class EventsController extends Controller
         // $events = Event::orderBy('created_at','asc')->paginate(10);
         // echo $events->user->name;
         //Create a geojson for showing the events on the map
-        $jsonFile =["type" => "FeatureCollection", "features" => []];
+        $jsonEvents =["type" => "FeatureCollection", "features" => []];
         foreach ($events as $key => $event) {
-          $jsonFile['features'][$key] = [
+          $jsonEvents['features'][$key] = [
             "type" => "Feature",
             "geometry" => [
               "type" => "Point",
               "coordinates" => [
-                11.576124,
-                48.137154
+                $event->coordinate_lon,
+                $event->coordinate_lat
               ]
             ],
             "properties" => [
@@ -52,9 +52,7 @@ class EventsController extends Controller
           ];
         }
         // return($geojson);
-        return view ('events.index')->with('events', $events)->with('jsonFile', $jsonFile);
-
-        //Create a geojson for showing the events on the map
+        return view ('events.index')->with('events', $events)->with('jsonEvents', $jsonEvents);
     }
 
     /**
