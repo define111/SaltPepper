@@ -53,6 +53,7 @@ class EventsController extends Controller
         }
         // return($geojson);
         return view ('events.index')->with('events', $events)->with('jsonEvents', $jsonEvents);
+
     }
 
     /**

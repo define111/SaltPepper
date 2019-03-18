@@ -72,7 +72,7 @@ function createListingsMap(options) {
       about the listings
     ====================================================
     */
-    L.geoJSON(settings.$jsonEvents, {
+    L.geoJSON(settings.jsonEvents, {
         pointToLayer: pointToLayer,
         onEachFeature: onEachFeature
     }).addTo(map);
