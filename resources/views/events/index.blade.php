@@ -225,7 +225,17 @@
                   <!--img.img-fluid(src="#{imgBasePath}#{val.image}" alt="#{val.name}")--><a href="/events/{{$event->id}}" class="tile-link"></a>
                   <div class="card-img-overlay-bottom z-index-20">
                     <h4 class="text-white text-shadow">{{$event->sideA}} treffen auf {{$event->sideB}}</h4>
-                    <p class="mb-2 text-xs"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                    </i>
+                    <p class="mb-2 text-xs">
+                      @if($event->user->rating)
+                        @for ($i = 1; $i <= $event->user->rating; $i++)
+                        <i class="fa fa-star text-warning"></i>
+                        @endfor
+                        @for ($i = $event->user->rating; $i < 5; $i++)
+                        <i class="fa fa-star text-gray-300"></i>
+                        @endfor
+                      @else
+                        <i class="text-white text-sm-left">No ratings yet</i>
+                      @endif
                     </p>
                   </div>
                   <div class="card-img-overlay-top d-flex justify-content-between align-items-center">

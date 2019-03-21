@@ -187,37 +187,35 @@ function createListingsMap(options) {
         }
 
         if (properties.address) {
-            var address = '<p class="text-muted mb-1"><i class="fas fa-map-marker-alt fa-fw text-dark mr-2"></i>' + properties.address + '</p>'
+            var address = '<p class="text-muted mb-1"><i class="fas fa-map-marked fa-fw text-dark mr-2"></i>' + properties.address + '</p>'
         } else {
             address = ''
         }
-        if (properties.email) {
-            var email = '<p class="text-muted mb-1"><i class="fas fa-envelope-open fa-fw text-dark mr-2"></i><a href="mailto:' + properties.email + '" class="text-muted">' + properties.email + '</a></p>'
-        } else {
-            email = ''
-        }
-        if (properties.phone) {
-            var phone = '<p class="text-muted mb-1"><i class="fa fa-phone fa-fw text-dark mr-2"></i>' + properties.phone + '</p>'
-        } else {
-            phone = ''
-        }
-
-        if (properties.stars) {
-            var stars = '<div class="text-xs">'
-            for (var step = 1; step <= 5; step++) {
-                if (step <= properties.stars) {
-                    stars += "<i class='fa fa-star text-warning'></i>"
-                } else {
-                    stars += "<i class='fa fa-star text-gray-300'></i>"
+        if (properties.organiser) {
+            var organiser = '<p class="text-muted mb-1"><i class="fas fa-address-book fa-fw text-dark mr-2"></i><a href="mailto:' + properties.organiser + '" class="text-muted">' + properties.organiser
+            if (properties.rating_user) {
+                organiser += '&nbsp <class="text-xs">('
+                for (var step = 1; step <= 5; step++) {
+                    if (step <= properties.rating_user) {
+                        organiser += "<i class='fa fa-star text-warning'></i>"
+                    } else {
+                        organiser += "<i class='fa fa-star text-gray-300'></i>"
+                    }
                 }
+                organiser += ")</i>"
             }
-            stars += "</div>"
+        + '</a></p>'
         } else {
-            stars = ''
+          organiser = ''
+        }
+        if (properties.place) {
+            var place = '<p class="text-muted mb-1"><i class="fas fa-location-arrow fa-fw text-dark mr-2"></i>' + properties.place + '</p>'
+        } else {
+            place = ''
         }
 
         if (properties.url) {
-            var url = '<a href="' + properties.url + '">' + properties.url + '</a><br>'
+            var url = '<a href="' + properties.url + '"></a><br>'
 
         } else {
             url = ''
@@ -231,10 +229,10 @@ function createListingsMap(options) {
                 image +
                 '<div class="text">' +
                 title +
+                organiser +
                 about +
+                place +
                 address +
-                email +
-                phone +
                 '</div>' +
                 '</div>';
         } else if (settings.mapPopupType == 'rental') {
