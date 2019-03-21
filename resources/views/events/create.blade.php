@@ -8,55 +8,87 @@
         <div class="card-header">{{ __('Create event') }}</div>
         <div class="card-body">
           {!! Form::open(['action' => 'EventsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-          <div class="form-row justify-content-md-center text-center align-items-center">
-            <div class="col-lg-auto mb-3">
-              {{Form::text('sideA', '', ['class' => 'form-control', 'class' => 'btn btn-outline-primary', 'placeholder' => 'Die erste Seite'])}}
-            </div>
-            <div class="col-md-2 mb-3">
-                {{Form::label('vs', 'treffen auf', ['class' => 'text-center'])}}
-            </div>
-            <div class="col-lg-auto mb-3">
-              {{Form::text('sideB', '', ['class' => 'form-control', 'class' => 'btn btn-outline-primary', 'placeholder' => 'Die zweite Seite'])}}
+          <div class="form-row align-items-center">
+            <div class="col-md-auto mb-2">
+                {{Form::label('Title', '1. Der Titel', ['class' => 'h5'])}}
             </div>
           </div>
-          <div class="form-row align-items-center">
-            <div class="col-auto mb-3">
-              {{Form::select('city', ['' => 'Stadt', 'muenchen' => 'München', 'stuttgart' => 'Stuttgart'], 'muenchen', ['class' => 'btn btn-outline-primary dropdown-toggle'])}}
+          <div class="form-group row">
+            <div class="col-lg-auto">
+              {{Form::text('sideA', '', ['class' => 'form-control', 'class' => 'btn btn-outline-primary dropdown-toggle', 'placeholder' => 'Die erste Seite'])}}
             </div>
-            <div class="col-auto mb-3">
-              {{Form::select('place', ['' => 'Location', 'parkcafe' => 'Parkcafe'], '', ['class' => 'btn btn-outline-primary dropdown-toggle'])}}
+            <div class="col-md-2 col-form-label text-nowrap">
+              <label>treffen auf</label>
             </div>
-            <div class="col-auto mb-3">
-              {{Form::text('address', '', ['class' => 'form-control','placeholder' => 'Autofill address.'])}}
+            <div class="col-lg-auto">
+              {{Form::text('sideB', '', ['class' => 'form-control', 'class' => 'btn btn-outline-primary dropdown-toggle', 'placeholder' => 'Die zweite Seite'])}}
+            </div>
+          </div>
+          <div class="form-row ">
+            <div class="col-md-auto mb-2">
+                {{Form::label('Title', '2. Die Details', ['class' => 'h5'])}}
             </div>
           </div>
           <div class="form-row">
-            <div class="col-md-3 mb-3">
-              {{Form::label('date', 'Datum')}}
-              {{Form::date('date','',['class' => 'form-control'])}}
+            <div class="col-md-4 mb-3">
+              {{Form::label('city', 'Stadt')}}
+              {{Form::select('city', ['' => 'Stadt', 'muenchen' => 'München', 'stuttgart' => 'Stuttgart'], 'muenchen', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
             </div>
-            <div class="col-md-3 mb-3">
-              {{Form::label('starttime', 'Startzeit')}}
-              {{Form::time('starttime','',['class' => 'form-control'])}}
+            <div class="col-md-4 o mb-3">
+                {{Form::label('city', 'Stadt')}}
+              {{Form::select('place', ['' => 'Location', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
             </div>
-            <div class="col-md-3 mb-3">
-              {{Form::label('people', 'Personenzahl')}}
-              {{Form::number('people','',['class' => 'form-control'])}}
-            </div>
-            <div class="col-md-3 mb-3">
-              {{Form::label('duration', 'Zeit (Min)')}}
-              {{Form::number('duration','',['class' => 'form-control'])}}
+            <div class="col-md-4  mb-3">
+              {{Form::label('address', 'Adresse')}}
+              {{Form::text('address', '', ['class' => 'form-control','placeholder' => 'Autofill address.'])}}
             </div>
           </div>
-          <div class="col-md-4 mb-3">
-            {{Form::label('endtime', 'Endzeit')}}
-            {{Form::time('endtime','',['class' => 'form-control'])}}
+          <div id ="eventData">
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                {{Form::label('date', 'Datum')}}
+                {{Form::date('date','',['class' => 'form-control btn btn-outline-primary'])}}
+              </div>
+              <div class="col-md-4 mb-3">
+                {{Form::label('starttime', 'Startzeit')}}
+                {{Form::time('starttime','',['class' => 'form-control btn btn-outline-primary'])}}
+              </div>
+              <div class="col-md-4 mb-3">
+                {{Form::label('duration', 'Zeit/Date (Min)')}}
+                {{Form::number('duration','5',['class' => 'form-control btn btn-outline-primary'])}}
+              </div>
+            </div>
+            <div class="form-row justify-content-md-center align-items-center">
+              <div class="col-md-3 mb-3">
+                {{Form::label('people', 'Personenzahl')}}
+                {{Form::number('people','',['class' => 'form-control btn btn-outline-primary'])}}
+              </div>
+              <div class="col-md-3 mb-3">
+                {{Form::label('price', 'Preis (Euro)')}}
+                {{Form::number('price','',['class' => 'form-control btn btn-outline-primary'])}}
+              </div>
+            </div>
           </div>
+          <div class="form-row">
+            <div class="col-md-auto mb-2">
+                {{Form::label('autofill', '3. Automatische Angaben', ['class' => 'h5'])}}
             </div>
-            <div class="form-group">
-                {{Form::label('number_of_persons', 'The Number of persons per gr')}}
-                {{Form::number('number_of_persons', '', ['class' => 'form-control', 'class' => 'narrow_button' , 'placeholder' => 'The Number of persons per Group'])}}
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              {{Form::label('enddate', 'Enddatum')}}
+              {{Form::date('enddate','',['class' => 'form-control', 'readonly'=>"readonly"])}}
             </div>
+            <div class="col-md-4 mb-3">
+              {{Form::label('endtime', 'Endzeit')}}
+              {{Form::time('endtime','',['class' => 'form-control', 'readonly'=>"readonly"])}}
+            </div>
+            <div class="col-md-4 mb-3">
+              {{Form::label('profit', 'Dein Gewinn')}}
+              {{Form::number('profit','',['class' => 'form-control', 'readonly'=>"readonly"])}}
+            </div>
+          </div>
+        </div>
             <div class="form-group">
                 {{Form::label('price', 'The price per person in Euro.')}}
                 {{Form::number('price', '', ['class' => 'form-control', 'class' => 'narrow_button' ,'placeholder' => 'Price in Euro'])}}
@@ -89,32 +121,5 @@
 <script>
     CKEDITOR.replace( 'article-ckeditor' );
 </script>
-<script>
-document.getElementById("duration").addEventListener("change", function() {
-  var startdateDoc = document.getElementById("date").value;
-  var starttimeDoc = document.getElementById("starttime").value;
-  var startdate = startdateDoc.concat('T', starttimeDoc,':00');
-  var start = new Date(startdate);
-  var numberOfPeople = Number(document.getElementById("people").value);
-  var durationOfDate = Number(this.value);
-  var durationOfDates = durationOfDate*numberOfPeople;
-  var endtime = start.setMinutes(start.getMinutes()+durationOfDates);
-  var endtimeDoc = new Date (endtime);
-  document.getElementById('endtime').value=endtimeDoc.toLocaleString('de-DE',{hour: 'numeric', minute: 'numeric'});
-});
-//   var enddtime = new Date();
-//   enddtime = enddtime.getTime();
-//   console.log(enddtime);
-//   // var eventdata = document.forms["eventdata"];
-//   var starttime = eventdata.elements["starttime"].value;
-//   starttime = new Date(starttime);
-//   var duration = eventdata.elements["duration"];
-//   duration = new Date(duration);
-//   if(starttime != "")
-//          {
-//              endtime = starttime + duration;
-//          };
-//   eventdata.elements["endtime"]=endtime;
-// });
-</script>
+<script src="js/create-event.js"></script>
 @endsection
