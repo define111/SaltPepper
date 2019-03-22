@@ -34,6 +34,7 @@ function calculateEndtime(e) {
 };
 });
 // Create a collapsible part
+document.querySelector(".content").style.display = "none";
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
@@ -41,10 +42,20 @@ for (i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
+    if (content.style.display === "none") {
+      content.style.display = "";
     } else {
-      content.style.display = "block";
+      content.style.display = "none";
     }
   });
-}
+};
+// Create a possibility to choose different prices for the two groups
+var detail = document.querySelector(".preisdetail");
+detail.style.display="none";
+$("#preisdetails").change(function() {
+  if (this.value === "nein") {
+    detail.style.display = "";
+  } else {
+    detail.style.display = "none";
+  }
+});

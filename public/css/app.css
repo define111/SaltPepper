@@ -10675,16 +10675,11 @@ a.text-dark:focus {
 }
 
 .collapsible {
-  margin-top: 0.2rem !important;
-  margin-bottom: 0.2rem !important;
-  background-color: #777;
-  color: white;
   cursor: pointer;
 }
 
-.active,
 .collapsible:hover {
-  background-color: #555;
+  background-color: #CDD4FC;
 }
 
 .content {

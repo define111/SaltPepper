@@ -20,15 +20,14 @@
 
 //for the Collapsible
 .collapsible {
-  margin-top:0.2rem !important;
-  margin-bottom:0.2rem !important;
-  background-color: #777;
-  color: white;
+
+  // background-color: #8D9CFA;
+  // color: #4E66F8;
   cursor: pointer;
 }
 
-.active, .collapsible:hover {
-  background-color: #555;
+.collapsible:hover {
+  background-color: #CDD4FC;
 }
 
 .content {
