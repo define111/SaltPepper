@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -34,13 +35,13 @@
               {{Form::label('city', 'Stadt')}}
               {{Form::select('city', ['' => 'Stadt', 'muenchen' => 'München', 'stuttgart' => 'Stuttgart'], 'muenchen', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
             </div>
-            <div class="col-md-4 o mb-3">
-                {{Form::label('city', 'Stadt')}}
-              {{Form::select('place', ['' => 'Location', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
+            <div class="col-md-4 mb-3">
+                {{Form::label('location', 'Ort')}}
+              {{Form::select('location', ['' => 'Ort', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
             </div>
-            <div class="col-md-4  mb-3">
-              {{Form::label('address', 'Adresse')}}
-              {{Form::text('address', '', ['class' => 'form-control','placeholder' => 'Autofill address.'])}}
+            <div class="col-md-4 mb-3">
+              {{Form::label('category', 'Kategorie')}}
+              {{Form::select('category', ['' => 'Kategorie', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
             </div>
           </div>
           <div id ="eventData">
@@ -69,6 +70,26 @@
               </div>
             </div>
           </div>
+          {{-- the collpasible row --}}
+          <div class="form-row collapsible">
+            <div class="col-md-auto mb-2">
+                {{Form::label('Title', '3. Zusatzangaben', ['class' => 'h5'])}}
+            </div>
+          </div>
+          <div class="form-row content">
+            <div class="col-md-4 mb-3">
+              {{Form::label('city', 'Stadt')}}
+              {{Form::select('city', ['' => 'Stadt', 'muenchen' => 'München', 'stuttgart' => 'Stuttgart'], 'muenchen', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
+            </div>
+            <div class="col-md-4 mb-3">
+                {{Form::label('location', 'Ort')}}
+              {{Form::select('location', ['' => 'Ort', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
+            </div>
+            <div class="col-md-4 mb-3">
+              {{Form::label('category', 'Kategorie')}}
+              {{Form::select('category', ['' => 'Kategorie', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
+            </div>
+          </div>
           <div class="form-row">
             <div class="col-md-auto mb-2">
                 {{Form::label('autofill', '3. Automatische Angaben', ['class' => 'h5'])}}
@@ -88,13 +109,8 @@
               {{Form::number('profit','',['class' => 'form-control', 'readonly'=>"readonly"])}}
             </div>
           </div>
+
         </div>
-            <div class="form-group">
-                {{Form::label('price', 'The price per person in Euro.')}}
-                {{Form::number('price', '', ['class' => 'form-control', 'class' => 'narrow_button' ,'placeholder' => 'Price in Euro'])}}
-            </div>
-            {{Form::label('category', 'Category')}}
-            {{Form::select('category', ['sport' => 'Sport', 'love' => 'Love', 'art' => 'Art'])}}
             <div class="form-group">
                 {{Form::label('description', 'Description')}}
                 {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'The description of the event, Itinerary of the speed dating, Location decsription'])}}
@@ -121,5 +137,5 @@
 <script>
     CKEDITOR.replace( 'article-ckeditor' );
 </script>
-<script src="js/create-event.js"></script>
+<script src={{ asset('js/create-event.js') }}></script>
 @endsection

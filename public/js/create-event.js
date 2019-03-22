@@ -1,3 +1,4 @@
+// Calculate the data
 document.getElementById("people").addEventListener("change", function() {
 var theParent = document.querySelector("#eventData");
 theParent.addEventListener("change", calculateEndtime, false);
@@ -32,3 +33,18 @@ function calculateEndtime(e) {
   e.stopPropagation();
 };
 });
+// Create a collapsible part
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
