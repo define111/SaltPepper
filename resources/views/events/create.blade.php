@@ -6,6 +6,10 @@
 <script src="{{mix('js/typeahead.bundle.js')}}"></script>
 <script src="{{mix('js/typeahead-address-photon.js')}}"></script>
 
+{{-- for the calender --}}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -18,13 +22,13 @@
             <legend class='h5'>1. Der Titel</legend>
             <div class="form-group row">
               <div class="col-lg-auto">
-                {{Form::text('sideA', '', ['class' => 'form-control', 'class' => 'btn btn-outline-primary dropdown-toggle', 'placeholder' => 'Die erste Seite'])}}
+                {{Form::text('sideA', '', ['class' => 'form-control', 'placeholder' => 'Die erste Seite'])}}
               </div>
               <div class="col-md-2 col-form-label text-nowrap">
                 <label>treffen auf</label>
               </div>
               <div class="col-lg-auto">
-                {{Form::text('sideB', '', ['class' => 'form-control', 'class' => 'btn btn-outline-primary dropdown-toggle', 'placeholder' => 'Die zweite Seite'])}}
+                {{Form::text('sideB', '', ['class' => 'form-control', 'placeholder' => 'Die zweite Seite'])}}
               </div>
             </div>
 
@@ -32,25 +36,24 @@
             <div class="form-row">
               <div class="col-md-8 mb-3">
                 {{Form::label('location', 'Ort oder Adresse')}}
-                {{Form::text('location', '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle text-left', 'placeholder' => 'Schreib hier den Namen', 'id'=>"inpAddress"])}}
+                {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Schreib hier den Namen', 'id'=>"inpAddress"])}}
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-9 mb-3">
                 {{Form::label('category', 'Kategorie')}}
-                {{Form::select('category', ['' => 'Wähle die Kategorie aus', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
+                {{Form::select('category', ['' => 'Wähle die Kategorie aus', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control'])}}
               </div>
             </div>
             <div class="form-row" id ="eventData">
               <div class="col-md-4 mb-3">
                 {{Form::label('date', 'Datum')}}
-                {{Form::date('date','',['class' => 'form-control btn btn-outline-primary'])}}
+                {{Form::text('date','tt.mm.yyyy',['class' => 'form-control','id'=>"datepicker"])}}<i class="icon-user"></i>
               </div>
               <div class="col-md-4 mb-3">
                 {{Form::label('starttime', 'Startzeit')}}
-                {{Form::time('starttime','',['class' => 'form-control btn btn-outline-primary'])}}
+                {{Form::time('starttime','',['class' => 'form-control'])}}
               </div>
-            </div>
             </div>
 
             {{-- the collapsible row --}}
@@ -60,44 +63,44 @@
               <div class="form-row">
                 <div class="col-md-4 mb-3">
                   {{Form::label('duration', 'Zeit/Date (Min)')}}
-                  {{Form::number('duration','4',['class' => 'form-control btn btn-outline-primary'])}}
+                  {{Form::number('duration','4',['class' => 'form-control'])}}
                 </div>
                 <div class="col-md-4 mb-3">
                   {{Form::label('price', 'Preis (Euro)')}}
-                  {{Form::number('price','15',['class' => 'form-control btn btn-outline-primary'])}}
+                  {{Form::number('price','15',['class' => 'form-control'])}}
                 </div>
                 <div class="col-md-4 mb-3">
                   {{Form::label('people', 'Personenzahl')}}
-                  {{Form::number('people','20',['class' => 'form-control btn btn-outline-primary'])}}
+                  {{Form::number('people','20',['class' => 'form-control'])}}
                 </div>
               </div>
               <legend class='h6'>3.2. Zeitplan</legend>
               <div class="form-row">
-                <div class="col-md-3 mb-3">
+                <div class="col-md-5 mb-3">
                   {{Form::label('registration', 'Registrierung (Min)')}}
-                  {{Form::number('registration','15',['class' => 'form-control btn btn-outline-primary'])}}
+                  {{Form::number('registration','15',['class' => 'form-control'])}}
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-5 mb-3">
                   {{Form::label('break', 'Pause (Min)')}}
-                  {{Form::number('break','15',['class' => 'form-control btn btn-outline-primary'])}}
+                  {{Form::number('break','15',['class' => 'form-control'])}}
                 </div>
               </div>
               <legend class='h5'>3.3. Preisauswahl</legend>
               <div class="form-row">
                 <div class="col-md-12 mb-3">
                   {{Form::label('pricedetails', 'Gleiche Preise für beide Gruppen?')}}
-                  {{Form::select('pricedetails', ['ja' => 'Ja', 'nein' => 'nein'], 'ja', ['class' => 'form-control btn btn-outline-primary dropdown-toggle', 'id'=>"preisdetails"])}}
+                  {{Form::select('pricedetails', ['ja' => 'Ja', 'nein' => 'nein'], 'ja', ['class' => 'form-control', 'id'=>"preisdetails"])}}
                 </div>
               </div>
               <div class="form-row preisdetail">
                 <div class="form-row">
                   <div class="col-md-4 mb-3">
                     {{Form::label('price', 'Preis Gruppe A (Euro)')}}
-                    {{Form::number('price','',['class' => 'form-control btn btn-outline-primary'])}}
+                    {{Form::number('price','',['class' => 'form-control'])}}
                   </div>
                   <div class="col-md-4 mb-3">
                     {{Form::label('price1', 'Preis Gruppe B (Euro)')}}
-                    {{Form::number('price1','',['class' => 'form-control btn btn-outline-primary'])}}
+                    {{Form::number('price1','',['class' => 'form-control'])}}
                   </div>
                 </div>
               </div>

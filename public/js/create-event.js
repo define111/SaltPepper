@@ -177,6 +177,12 @@ var engine = new PhotonAddressEngine({
 $('#inpAddress').typeahead(null, {
   source: engine.ttAdapter(),
   displayKey: 'description'
+}); //for the datepicker
+
+$(function () {
+  $("#datepicker").datepicker({
+    dateFormat: 'dd.mm.yy'
+  });
 });
 
 /***/ }),

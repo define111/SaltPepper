@@ -73,3 +73,8 @@ $("#preisdetails").change(function() {
     source: engine.ttAdapter(),
     displayKey: 'description'
   });
+
+  //for the datepicker
+  $( function() {
+    $( "#datepicker" ).datepicker({dateFormat: 'dd.mm.yy'});
+  } );
