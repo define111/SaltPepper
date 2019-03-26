@@ -1,4 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/create-event.js": "/js/create-event.js",
+    "/js/typeahead.bundle.js": "/js/typeahead.bundle.js",
+    "/js/typeahead-address-photon.js": "/js/typeahead-address-photon.js"
 }

@@ -2,13 +2,17 @@
 
 @section('content')
 
+{{-- For address autocomplete --}}
+<script src="{{mix('js/typeahead.bundle.js')}}"></script>
+<script src="{{mix('js/typeahead-address-photon.js')}}"></script>
+
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">{{ __('Create event') }}</div>
         <div class="card-body">
-          {!! Form::open(['action' => 'EventsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+          {!! Form::open(['action' => 'EventsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'autocomplete'=>"off"]) !!}
           <fieldset>
 
             <legend class='h5'>1. Der Titel</legend>
@@ -26,34 +30,31 @@
 
             <legend class='h5'>2. Die Details</legend>
             <div class="form-row">
-              <div class="col-md-4 mb-3">
-                {{Form::label('city', 'Stadt')}}
-                {{Form::select('city', ['' => 'Stadt', 'muenchen' => 'München', 'stuttgart' => 'Stuttgart'], 'muenchen', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
-              </div>
-              <div class="col-md-4 mb-3">
-                  {{Form::label('location', 'Ort')}}
-                {{Form::select('location', ['' => 'Ort', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
-              </div>
-              <div class="col-md-4 mb-3">
-                {{Form::label('category', 'Kategorie')}}
-                {{Form::select('category', ['' => 'Kategorie', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
+              <div class="col-md-8 mb-3">
+                {{Form::label('location', 'Ort oder Adresse')}}
+                {{Form::text('location', '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle text-left', 'placeholder' => 'Schreib hier den Namen', 'id'=>"inpAddress"])}}
               </div>
             </div>
-            <div id ="eventData">
-              <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  {{Form::label('date', 'Datum')}}
-                  {{Form::date('date','',['class' => 'form-control btn btn-outline-primary'])}}
-                </div>
-                <div class="col-md-4 mb-3">
-                  {{Form::label('starttime', 'Startzeit')}}
-                  {{Form::time('starttime','',['class' => 'form-control btn btn-outline-primary'])}}
-                </div>
+            <div class="form-row">
+              <div class="col-md-9 mb-3">
+                {{Form::label('category', 'Kategorie')}}
+                {{Form::select('category', ['' => 'Wähle die Kategorie aus', 'parkcafe' => 'Parkcafe'], '', ['class' => 'form-control btn btn-outline-primary dropdown-toggle'])}}
               </div>
+            </div>
+            <div class="form-row" id ="eventData">
+              <div class="col-md-4 mb-3">
+                {{Form::label('date', 'Datum')}}
+                {{Form::date('date','',['class' => 'form-control btn btn-outline-primary'])}}
+              </div>
+              <div class="col-md-4 mb-3">
+                {{Form::label('starttime', 'Startzeit')}}
+                {{Form::time('starttime','',['class' => 'form-control btn btn-outline-primary'])}}
+              </div>
+            </div>
             </div>
 
             {{-- the collapsible row --}}
-            <legend class='collapsible h5'>3. Zusatzangaben &nbsp<i class="fa fa-caret-down align-top"></i></legend>
+            <legend class='collapsible h5'>3. Zusatzoptionen &nbsp<i class="fa fa-caret-down align-top"></i></legend>
             <div class="form-row content">
               <legend class='h6'>3.1. Allgemein</legend>
               <div class="form-row">
@@ -142,10 +143,12 @@
   </div>
 </div>
 
+
+
+<script src={{ asset('js/create-event.js') }}></script>
 {{-- Script for ck-editor --}}
 <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
 <script>
     CKEDITOR.replace( 'article-ckeditor' );
 </script>
-<script src={{ asset('js/create-event.js') }}></script>
 @endsection

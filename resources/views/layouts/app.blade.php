@@ -58,6 +58,7 @@
      <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
      <script src="https://d19m59y37dris4.cloudfront.net/directory/1-0/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
      <!-- Magnific Popup - Lightbox for the gallery-->
+     
     </head>
     <body style="padding-top: 72px;">
         @include('inc.navbar')
