@@ -76,5 +76,11 @@ $("#preisdetails").change(function() {
 
   //for the datepicker
   $( function() {
-    $( "#datepicker" ).datepicker({dateFormat: 'dd.mm.yy'});
+    $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
   } );
+
+//for the clockpicker
+$('.clockpicker').clockpicker({
+  autoclose: true,
+  default: 'now'
+});

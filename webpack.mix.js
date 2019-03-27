@@ -14,5 +14,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
    .copy('node_modules/corejs-typeahead/dist/typeahead.bundle.js', 'public/js')
    .copy('node_modules/typeahead-address-photon/dist/typeahead-address-photon.js', 'public/js')
+   .copy('node_modules/clockpicker/dist/bootstrap-clockpicker.min.js', 'public/js')
+   .copy('node_modules/clockpicker/dist/bootstrap-clockpicker.min.css', 'public/css')
    .js('resources/js/create-event.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');

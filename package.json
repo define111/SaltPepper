@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.8"
     },
     "dependencies": {
+        "clockpicker": "0.0.7",
         "corejs-typeahead": "^1.2.1",
         "typeahead-address-photon": "^1.0.0"
     }

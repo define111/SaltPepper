@@ -181,8 +181,13 @@ $('#inpAddress').typeahead(null, {
 
 $(function () {
   $("#datepicker").datepicker({
-    dateFormat: 'dd.mm.yy'
+    dateFormat: 'yy-mm-dd'
   });
+}); //for the clockpicker
+
+$('.clockpicker').clockpicker({
+  autoclose: true,
+  default: 'now'
 });
 
 /***/ }),
