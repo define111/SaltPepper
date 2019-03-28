@@ -52,7 +52,7 @@
             <div class="form-row" id ="eventData">
               <div class="col-md-4 mb-3">
                 {{Form::label('date', 'Datum')}}
-                {{Form::date('date','',['class' => 'form-control','id'=>"datepicker"])}}<i class="icon-user"></i>
+                {{Form::text('date','',['class' => 'form-control','id'=>"datepicker"])}}
               </div>
               <div class="col-md-4 mb-3">
                 {{Form::label('starttime', 'Startzeit')}}

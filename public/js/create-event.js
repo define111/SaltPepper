@@ -171,6 +171,28 @@ $("#preisdetails").change(function () {
 
 var engine = new PhotonAddressEngine({
   lang: 'de',
+  formatResult: function formatResult(feature) {
+    var formatted = feature.properties.name,
+        type = feature.properties.osm_value;
+
+    if (feature.properties.street) {
+      formatted += ', ' + feature.properties.street;
+    }
+
+    if (feature.properties.housenumber) {
+      formatted += ' ' + feature.properties.housenumber;
+    }
+
+    if (feature.properties.city && feature.properties.city !== feature.properties.name) {
+      formatted += ', ' + feature.properties.city;
+    }
+
+    if (feature.properties.country) {
+      formatted += ', ' + feature.properties.country;
+    }
+
+    return formatted;
+  },
   lat: 48.137154,
   lon: 11.576124
 });
@@ -181,7 +203,7 @@ $('#inpAddress').typeahead(null, {
 
 $(function () {
   $("#datepicker").datepicker({
-    dateFormat: 'yy-mm-dd'
+    dateFormat: 'dd.mm.yy'
   });
 }); //for the clockpicker
 
