@@ -22,3 +22,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/search','SearchController');
+
+//Multi-step form
+Route::get('/create/step1', 'EventsController@createStep1');
+Route::post('/create/step1', 'EventsController@postCreateStep1');
+Route::get('/create/step2', 'EventsController@createStep2');
+Route::post('/create/step2', 'EventsController@postCreateStep2');
+Route::get('/create/step3', 'EventsController@createStep3');
+Route::post('/create/step3', 'EventsController@postCreateStep3');

@@ -55,7 +55,6 @@ class EventsController extends Controller
     'sideB' => 'required',
     'number_of_persons' => 'required',
     'description' => 'required',
-    'tags' => 'required'
     ]);
 
     // Handle File Upload
@@ -202,4 +201,40 @@ class EventsController extends Controller
         $event->delete();
         return redirect('/events')->with('success', 'Event Removed');
     }
+
+    //Multi step
+    public function createStep1(Request $request)
+        {
+            $event = $request->session()->get('event');
+            return view('events.create-step1',compact('event', $event));
+        }
+        /**
+         * Post Request to store step1 info in session
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
+        public function postCreateStep1(Request $request)
+        {
+            $validatedData = $request->validate([
+                'sideA' => 'required',
+                'sideB' => 'required',
+                'location' => 'required',
+                'category' => 'required',
+                'date' => 'required',
+                'starttime' => 'required',
+            ]);
+            if(empty($request->session()->get('event'))){
+                $event = new Event();
+                $event->fill($validatedData);
+                $request->session()->put('event', $event);
+            }else{
+                $event = $event->session()->get('event');
+                $event->fill($validatedData);
+                $request->session()->put('event', $event);
+            }
+            return redirect('/create/step2');
+        }
+
+    //Multistep end
 }
