@@ -61,6 +61,13 @@ class EventsController extends Controller
                'registration' => 'required',
                'pricedetails' => 'required',
            ]);
+           if($validatedData['pricedetails'] == 'nein'){
+             $validatedData = $request->validate([
+                 'priceA' => 'required',
+                 'priceB' => 'required',
+             ]);
+           }else{
+           }
            $validatedData['date'] = strtotime($request->input('date') . " " . $request->input('starttime') . ":00");
            unset($validatedData['starttime']);
            if(empty($request->session()->get('event'))){

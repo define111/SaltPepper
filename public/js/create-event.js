@@ -93,7 +93,6 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// window.Bloodhound = require('bloodhound');
 // Calculate the data
 document.getElementById("people").addEventListener("change", function () {
   var theParent = document.querySelector("#eventData");
@@ -138,36 +137,53 @@ document.getElementById("price").addEventListener("change", function () {
   }
 
   ;
-}); // Create a collapsible part
+}); // function to close and open price details
 
-document.querySelector(".content").style.display = "none";
-var coll = document.getElementsByClassName("collapsible");
-var i;
+function preisdetails() {
+  detail = document.querySelector(".preisdetail");
+  check = document.getElementById("preisdetails");
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function () {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-
-    if (content.style.display === "none") {
-      content.style.display = "";
-    } else {
-      content.style.display = "none";
-    }
-  });
-}
-
-; // Create a possibility to choose different prices for the two groups
-
-var detail = document.querySelector(".preisdetail");
-detail.style.display = "none";
-$("#preisdetails").change(function () {
-  if (this.value === "nein") {
+  if (check.value === "nein") {
     detail.style.display = "";
   } else {
     detail.style.display = "none";
+  } // The function returns the product of p1 and p2
+
+} // Create a collapsible part (1) and choose different prices for the two groups (2)
+// 1
+
+
+document.querySelector(".content").style.display = "none";
+var coll = document.getElementsByClassName("collapsible"); // 2
+
+var detail = document.querySelector(".preisdetail");
+var check = document.getElementById("preisdetails");
+coll[0].addEventListener("click", function () {
+  // 1
+  this.classList.toggle("active");
+  var content = this.nextElementSibling;
+
+  if (content.style.display === "none") {
+    content.style.display = "";
+  } else {
+    content.style.display = "none";
   }
-}); // for the address autocompleted
+
+  ; // 2
+
+  preisdetails();
+}); // Create a possibility to choose different prices for the two groups
+
+$("#preisdetails").change(function () {
+  preisdetails();
+}); //Change the label for the two prices
+
+var priceA = document.getElementById("labelpriceA");
+var priceB = document.getElementById("labelpriceB");
+var sideA = document.getElementsByName("sideA")[0].value;
+var sideB = document.getElementsByName("sideB")[0].value;
+priceA.innerHTML = 'Preis für' + sideA + ' (Euro)';
+priceB.innerHTML = 'Preis für' + sideB + ' (Euro)'; // for the address autocompleted
 
 var engine = new PhotonAddressEngine({
   lang: 'de',

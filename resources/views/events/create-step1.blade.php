@@ -106,11 +106,11 @@
               </div>
               <div class="form-row preisdetail">
                   <div class="col-md-4 mb-3">
-                    <label for="price">Preis Gruppe A (Euro)</label>
+                    <label id="labelpriceA" for="priceA"></label>
                     <input class="form-control" name="priceA" type="number" value="" id="priceA">
                   </div>
                   <div class="col-md-4 mb-3">
-                    <label for="price1">Preis Gruppe B (Euro)</label>
+                    <label id="labelpriceB" for="priceB">Preis Gruppe B (Euro)</label>
                     <input class="form-control" name="priceB" type="number" value="" id="priceB">
                   </div>
               </div>
@@ -126,7 +126,7 @@
                 <label for="enddate">Enddatum</label>
                 <input class="form-control" readonly="readonly" name="enddate" type="date" value="" id="enddate">
               </div>
-              
+
               <div class="col-md-4 mb-3">
                 <label for="endtime">Endzeit</label>
                 <input class="form-control" readonly="readonly" name="endtime" type="time" value="" id="endtime">

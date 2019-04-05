@@ -118,7 +118,6 @@ var engine = new PhotonAddressEngine({
 
     return formatted;
   },
-  limit: 7,
   lat: 48.137154,
   lon: 11.576124
 });
