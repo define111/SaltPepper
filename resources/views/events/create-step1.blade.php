@@ -20,20 +20,20 @@
       <div class="card">
         <div class="card-header">{{ __('Create event') }}</div>
         <div class="card-body">
-          <form method="POST" action="http://saltpepper.me/events/create-step1" accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off">
-            <input name="_token" type="hidden" value="TRlKR9SkqTAnEAjSSOKXENLLPtzXijWhE67wIxui">
+          <form method="POST" action="/events/create-step1" accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off">
+            @csrf
             <fieldset>
 
             <legend class='h5'>1. Die Teilnehmer</legend>
             <div class="form-group row">
               <div class="col-lg-auto">
-                  <input class="form-control" placeholder="Die Unternehmer" name="sideA" type="text" value="">
+                  <input class="form-control" placeholder="Die Unternehmer" name="sideA" type="text" value="@if(isset($event->sideA)) {{$event->sideA}}@else{{''}}@endif">
               </div>
               <div class="col-md-2 col-form-label text-nowrap">
                 <label>treffen auf</label>
               </div>
               <div class="col-lg-auto">
-                  <input class="form-control" placeholder="Die Unternhemer" name="sideB" type="text" value="">
+                  <input class="form-control" placeholder="Die Unternhemer" name="sideB" type="text" value="@if(isset($event->sideB)) {{$event->sideB}}@else{{''}}@endif">
               </div>
             </div>
 
@@ -41,81 +41,92 @@
             <div class="form-row">
               <div class="col-md-8 mb-3">
                 <label for="location">Ort oder Adresse</label>
-                    <input class="form-control" placeholder="Schreib hier den Namen" id="inpAddress" name="location" type="text" value="">
+                    <input class="form-control" placeholder="Schreib hier den Namen" id="inpAddress" name="location" type="text" value="@if(isset($event->location)) {{$event->location}}@else{{''}}@endif">
                 </div>
             </div>
             <div class="form-row">
               <div class="col-md-9 mb-3">
                 <label for="category">Kategorie</label>
-                  <select class="form-control" id="category" name="category"><option value="" selected="selected">Wähle die Kategorie aus</option><option value="parkcafe">Parkcafe</option></select>
+                  <select class="form-control" id="category" name="category">
+                    <option value="">Wähle die Kategorie aus</option>
+                    <option @if(isset($event->category) && $event->category == 'karriere')selected @else @endif value="karriere">Karriere</option>
+                    <option @if(isset($event->category) && $event->category == 'haushalt')selected @else @endif value="haushalt">Haushalt</option>
+                    <option @if(isset($event->category) && $event->category == 'kinder')selected @else @endif value="kinder">Kinder</option>
+                  </select>
               </div>
             </div>
             <div class="form-row" id ="eventData">
               <div class="col-md-4 mb-3">
                 <label for="date">Datum</label>
-                  <input class="form-control" id="datepicker" name="date" type="text" value="">
+                  <input class="form-control" id="datepicker" name="date" type="text" value="@if(isset($event->date)){{$event->date->format('d.m.Y')}}@else{{''}}@endif">
               </div>
               <div class="col-md-4 mb-3">
                 <label for="starttime">Startzeit</label>
-                  <input class="clockpicker form-control" name="starttime" type="time" value="" id="starttime">
+                  <input class="clockpicker form-control" id="starttime" name="starttime" type="time" value="@if(isset($event->date)){{$event->date->format('H:i')}}@else{{''}}@endif">
               </div>
             </div>
+
+            {{-- the collapsible row --}}
             <legend class='collapsible h5'>3. Zusatzoptionen &nbsp<i class="fa fa-caret-down align-top"></i></legend>
             <div class="form-row content">
               <legend class='h6'>3.1. Allgemein</legend>
               <div class="form-row">
                 <div class="col-md-4 mb-3">
                   <label for="duration">Zeit/Date (Min)</label>
-                  <input class="form-control" name="duration" type="number" value="4" id="duration">
+                  <input class="form-control" name="duration" type="number" value="@if(empty($event->duration)){{'4'}}@else{{$event->duration}}@endif" id="duration">
                 </div>
                 <div class="col-md-4 mb-3">
                   <label for="price">Preis (Euro)</label>
-                  <input class="form-control" name="price" type="number" value="15" id="price">
+                  <input class="form-control" name="price" type="number" value="@if(empty($event->price)){{'15'}}@else{{$event->price}}@endif" id="price">
                 </div>
                 <div class="col-md-4 mb-3">
                   <label for="people">Personenzahl</label>
-                  <input class="form-control" name="people" type="number" value="20" id="people">
+                  <input class="form-control" name="people" type="number" value="@if(empty($event->people)){{'20'}}@else{{$event->people}}@endif" id="people">
                 </div>
               </div>
               <legend class='h6'>3.2. Zeitplan</legend>
               <div class="form-row">
                 <div class="col-md-5 mb-3">
                   <label for="registration">Registrierung (Min)</label>
-                  <input class="form-control" name="registration" type="number" value="15" id="registration">
+                  <input class="form-control" name="registration" type="number" value="@if(empty($event->registration)){{'15'}}@else{{$event->registration}}@endif" id="registration">
                 </div>
                 <div class="col-md-5 mb-3">
                   <label for="break">Pause (Min)</label>
-                  <input class="form-control" name="break" type="number" value="15" id="break">
+                  <input class="form-control" name="break" type="number" value="@if(empty($event->break)){{'15'}}@else{{$event->break}}@endif" id="break">
                 </div>
               </div>
               <legend class='h5'>3.3. Preisauswahl</legend>
               <div class="form-row">
                 <div class="col-md-12 mb-3">
                   <label for="pricedetails">Gleiche Preise f&uuml;r beide Gruppen?</label>
-                  <select class="form-control" id="preisdetails" name="pricedetails"><option value="ja" selected="selected">Ja</option><option value="nein">nein</option></select>
+                  <select class="form-control" id="preisdetails" name="pricedetails">
+                    <option value="ja" @if(empty($event->pricedetails) || $event->pricedetails == 'ja')selected @else @endif>Ja</option>
+                    <option value="nein" @if($event->pricedetails == 'nein')selected @else @endif>Nein</option></select>
                 </div>
               </div>
               <div class="form-row preisdetail">
                   <div class="col-md-4 mb-3">
                     <label for="price">Preis Gruppe A (Euro)</label>
-                    <input class="form-control" name="price" type="number" value="" id="price">
+                    <input class="form-control" name="priceA" type="number" value="" id="priceA">
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="price1">Preis Gruppe B (Euro)</label>
-                    <input class="form-control" name="price1" type="number" value="" id="price1">
+                    <input class="form-control" name="priceB" type="number" value="" id="priceB">
                   </div>
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-auto mb-2">
-                  <label for="autofill" class="h5">4. Info f&uuml;r Dich</label>
+                  <label for="autofill" class="h5">4. Info für Dich</label>
               </div>
             </div>
             <div class="form-row">
+              {{-- Code zum anzeigen nur wenn ende tag anders als anfang --}}
               <div class="col-md-4 mb-3">
                 <label for="enddate">Enddatum</label>
                 <input class="form-control" readonly="readonly" name="enddate" type="date" value="" id="enddate">
               </div>
+              
               <div class="col-md-4 mb-3">
                 <label for="endtime">Endzeit</label>
                 <input class="form-control" readonly="readonly" name="endtime" type="time" value="" id="endtime">
@@ -125,7 +136,7 @@
                 <input class="form-control" readonly="readonly" name="profit" type="number" value="" id="profit">
               </div>
             </div>
-              <input class="btn btn-primary" type="submit" value="Weiter">
+            <button type="submit" class="btn btn-primary">Weiter</button>
           </fieldset>
           </form>
 

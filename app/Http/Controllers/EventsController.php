@@ -53,6 +53,13 @@ class EventsController extends Controller
                'category' => 'required',
                'date' => 'required',
                'starttime' => 'required',
+               'duration' => 'required',
+               'price' => 'required',
+               'people' => 'required',
+               'registration' => 'required',
+               'break' => 'required',
+               'registration' => 'required',
+               'pricedetails' => 'required',
            ]);
            $validatedData['date'] = strtotime($request->input('date') . " " . $request->input('starttime') . ":00");
            unset($validatedData['starttime']);
