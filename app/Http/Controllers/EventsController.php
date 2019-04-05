@@ -23,7 +23,6 @@ class EventsController extends Controller
         $jsonEvents = $this->GenerateGEOJSON($events);
         // return($geojson);
         return view ('events.index')->with('events', $events)->with('jsonEvents', $jsonEvents);
-
     }
 
     /**
@@ -31,210 +30,99 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('events.create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
+
+     //Multi step
+     public function createStep1(Request $request)
+     {
+         $event = $request->session()->get('event');
+         return view('events.create-step1',compact('event', $event));
+     }
+     /**
+      * Post Request to store step1 info in session
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @return \Illuminate\Http\Response
+      */
+       public function postCreateStep1(Request $request)
+       {
+           $validatedData = $request->validate([
+               'sideA' => 'required',
+               'sideB' => 'required',
+               'location' => 'required',
+               'category' => 'required',
+               'date' => 'required',
+               'starttime' => 'required',
+           ]);
+           $validatedData['date'] = strtotime($request->input('date') . " " . $request->input('starttime') . ":00");
+           unset($validatedData['starttime']);
+           if(empty($request->session()->get('event'))){
+               $event = new Event();
+               $event->fill($validatedData);
+               $request->session()->put('event', $event);
+           }else{
+               $event = $request->session()->get('event');
+               $event->fill($validatedData);
+               $request->session()->put('event', $event);
+           }
+           return redirect('/events/create-step2');
+           // print_r ($event);
+       }
+
+       /**
+        * Show the step 2 Form for creating a new event.
+        *
+        * @return \Illuminate\Http\Response
+        */
+       public function createStep2(Request $request)
+       {
+           $event = $request->session()->get('event');
+           return view('events.create-step2',compact('event', $event));
+       }
+       /**
+        * Post Request to store step1 info in session
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @return \Illuminate\Http\Response
+        */
+         public function postCreateStep2(Request $request)
+         {
+         $event = $request->session()->get('event');
+         $validatedData = $request->validate([
+            'description' => 'required',
+        ]);
+        $event->description = $validatedData['description'];
+        $request->session()->put('event', $event);
+        return redirect('/events/create-step3');
+        }
+
+         /**
+     * Show the Product Review page
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-    $this->validate($request, [
-    'city' => 'required',
-    'place' => 'required',
-    'date' => 'required',
-    'time' => 'required',
-    'price' => 'required',
-    'category' => 'required',
-    'sideA' => 'required',
-    'sideB' => 'required',
-    'number_of_persons' => 'required',
-    'description' => 'required',
-    ]);
-
-    // Handle File Upload
-    // if($request->hasFile('cover_image')){
-    //     // Get filename with the extension
-    //     $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-    //     // Get just filename
-    //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-    //     // Get just ext
-    //     $extension = $request->file('cover_image')->getClientOriginalExtension();
-    //     // Filename to store
-    //     $fileNameToStore= $filename.'_'.time().'.'.$extension;
-    //     // Upload Image
-    //     $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-    // } else {
-    //     $fileNameToStore = 'noimage.jpg';
-    // }
-
-    // Create Event
-    $event = new Event;
-    $event->city = $request->input('city');
-    $event->place = $request->input('place');
-    $event->address = $request->input('address');
-    $event->date = $request->input('date') . " " . $request->input('time') . ":00";
-    $event->price = $request->input('price');
-    $event->category = $request->input('category');
-    $event->sideA = $request->input('sideA');
-    $event->sideB = $request->input('sideB');
-    $event->number_of_persons = $request->input('number_of_persons');
-    $event->description = $request->input('description');
-    $event->tags = $request->input('tags');
-    //add the coordinates for the map
-    $address = $event->address;
-    $address = str_replace(" ", "+", $address);
-    $city = $event->city;
-    $event->user_id = auth()->user()->id;
-    // Create a stream
-    $opts = array('http'=>array('header'=>"User-Agent: StevesCleverAddressScript 3.7.6\r\n"));
-    $context = stream_context_create($opts);
-    // Open the file using the HTTP headers set above
-    $nominatim = file_get_contents('https://nominatim.openstreetmap.org/search?q='.$address.','.$city.'&format=json', false, $context);
-    // $nominatim = file_get_contents('https://nominatim.openstreetmap.org/search?q=simbacherstraße+17,M%C3%BCnchen&format=json', false, $context);
-    $nominatim1=json_decode($nominatim);
-    $event->coordinate_lat = $nominatim1[0]->lat;
-    $event->coordinate_lon = $nominatim1[0]->lon;
-    //
-    // $event->background_image = $fileNameToStore;
-    $event->save();
-
-    return redirect('/events')->with('success', 'Event Created');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $event = Event::find($id);
-        return view('events.show')->with('event', $event);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-      $event = Event::find($id);
-      return view('events.edit')->with('event', $event);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-      $this->validate($request, [
-      'city' => 'required',
-      'place' => 'required',
-      'date' => 'required',
-      'time' => 'required',
-      'price' => 'required',
-      'category' => 'required',
-      'sideA' => 'required',
-      'sideB' => 'required',
-      'number_of_persons' => 'required',
-      'description' => 'required',
-      'tags' => 'required'
-      ]);
-
-      // Handle File Upload
-      // if($request->hasFile('cover_image')){
-      //     // Get filename with the extension
-      //     $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-      //     // Get just filename
-      //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-      //     // Get just ext
-      //     $extension = $request->file('cover_image')->getClientOriginalExtension();
-      //     // Filename to store
-      //     $fileNameToStore= $filename.'_'.time().'.'.$extension;
-      //     // Upload Image
-      //     $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-      // } else {
-      //     $fileNameToStore = 'noimage.jpg';
-      // }
-
-      // Create Event
-      $event = Event::find($id);
-      $event->city = $request->input('city');
-      $event->place = $request->input('place');
-      $event->date = $request->input('date') . " " . $request->input('time') . ":00";
-      $event->price = $request->input('price');
-      $event->category = $request->input('category');
-      $event->sideA = $request->input('sideA');
-      $event->sideB = $request->input('sideB');
-      $event->number_of_persons = $request->input('number_of_persons');
-      $event->description = $request->input('description');
-      $event->tags = $request->input('tags');
-      // $event->user_id = auth()->user()->id;
-      // $event->background_image = $fileNameToStore;
-      $event->save();
-      //
-      return redirect('/events/'.$id)->with('success', 'Event Updated');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $event = Event::find($id);
-        $event->delete();
-        return redirect('/events')->with('success', 'Event Removed');
-    }
-
-    //Multi step
-    public function createStep1(Request $request)
+        public function createStep3(Request $request)
         {
             $event = $request->session()->get('event');
-            return view('events.create-step1',compact('event', $event));
-        }
-        /**
-         * Post Request to store step1 info in session
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @return \Illuminate\Http\Response
-         */
-        public function postCreateStep1(Request $request)
-        {
-            $validatedData = $request->validate([
-                'sideA' => 'required',
-                'sideB' => 'required',
-                'location' => 'required',
-                'category' => 'required',
-                'date' => 'required',
-                'starttime' => 'required',
-            ]);
-            if(empty($request->session()->get('event'))){
-                $event = new Event();
-                $event->fill($validatedData);
-                $request->session()->put('event', $event);
-            }else{
-                $event = $event->session()->get('event');
-                $event->fill($validatedData);
-                $request->session()->put('event', $event);
-            }
-            return redirect('/create/step2');
+            return view('events.create-step3',compact('event',$event));
         }
 
-    //Multistep end
+        /**
+   * Show the Product Review page
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function removeImage(Request $request)
+  {
+      $product = $request->session()->get('product');
+      $product->productImg = null;
+      return view('products.create-step2',compact('product', $product));
+  }
+
+ public function store(Request $request)
+ {
+   $event = $request->session()->get('event');
+   $event->save();
+   return redirect('/events')->with('success', 'Event Created');
+ }
 }

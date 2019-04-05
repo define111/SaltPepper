@@ -1,5 +1,5 @@
 <!-- Footer-->
-<footer class="position-relative z-index-10">
+<footer class="position-relative z-index-1">
   <!-- Main block - menus, subscribe form-->
   <div class="py-6 bg-gray-200 text-muted">
     <div class="container">
