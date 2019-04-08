@@ -26,10 +26,10 @@ class EventsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
 
 
      //Multi step
@@ -39,35 +39,36 @@ class EventsController extends Controller
          return view('events.create-step1',compact('event', $event));
      }
      /**
-      * Post Request to store step1 info in session
-      *
-      * @param  \Illuminate\Http\Request  $request
-      * @return \Illuminate\Http\Response
-      */
-       public function postCreateStep1(Request $request)
-       {
-           $validatedData = $request->validate([
-               'sideA' => 'required',
-               'sideB' => 'required',
-               'location' => 'required',
-               'category' => 'required',
-               'date' => 'required',
-               'starttime' => 'required',
-               'duration' => 'required',
-               'price' => 'required',
-               'people' => 'required',
-               'registration' => 'required',
-               'break' => 'required',
-               'registration' => 'required',
-               'pricedetails' => 'required',
-           ]);
-           if($validatedData['pricedetails'] == 'nein'){
-             $validatedData = $request->validate([
-                 'priceA' => 'required',
-                 'priceB' => 'required',
-             ]);
-           }else{
-           }
+     * Post Request to store step1 info in session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function postCreateStep1(Request $request)
+     {
+     $validatedData = $request->validate([
+       'sideA' => 'required',
+       'sideB' => 'required',
+       'location' => 'required',
+       'category' => 'required',
+       'date' => 'required',
+       'starttime' => 'required',
+       'duration' => 'required',
+       'price' => 'required',
+       'people' => 'required',
+       'registration' => 'required',
+       'break' => 'required',
+       'registration' => 'required',
+       'pricedetails' => 'required',
+        ]);
+     //to add the separte prices for the groups if needed
+     if($validatedData['pricedetails'] == 'nein'){
+       $validatedData = $request->validate([
+           'priceA' => 'required',
+           'priceB' => 'required',
+       ]);
+     }else{
+     }
            $validatedData['date'] = strtotime($request->input('date') . " " . $request->input('starttime') . ":00");
            unset($validatedData['starttime']);
            if(empty($request->session()->get('event'))){
@@ -94,16 +95,16 @@ class EventsController extends Controller
            return view('events.create-step2',compact('event', $event));
        }
        /**
-        * Post Request to store step1 info in session
-        *
-        * @param  \Illuminate\Http\Request  $request
-        * @return \Illuminate\Http\Response
-        */
-         public function postCreateStep2(Request $request)
-         {
-         $event = $request->session()->get('event');
-         $validatedData = $request->validate([
-            'description' => 'required',
+      * Post Request to store step1 info in session
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @return \Illuminate\Http\Response
+      */
+       public function postCreateStep2(Request $request)
+       {
+       $event = $request->session()->get('event');
+       $validatedData = $request->validate([
+          'description' => 'required',
         ]);
         $event->description = $validatedData['description'];
         $request->session()->put('event', $event);
