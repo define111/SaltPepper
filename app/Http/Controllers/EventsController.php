@@ -33,10 +33,10 @@ class EventsController extends Controller
 
 
      //Multi step
-     public function createStep1(Request $request)
+     public function createStep(Request $request)
      {
          $event = $request->session()->get('event');
-         return view('events.create-step1',compact('event', $event));
+         return view('events.create-step',compact('event', $event));
      }
      /**
      * Post Request to store step1 info in session
@@ -44,7 +44,7 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     public function postCreateStep1(Request $request)
+     public function postCreateStep(Request $request)
      {
      $validatedData = $request->validate([
        'sideA' => 'required',
@@ -136,14 +136,46 @@ class EventsController extends Controller
 
  public function store(Request $request)
  {
-   $event = $request->session()->get('event');
-   $event->save();
-   return redirect('/events')->with('success', 'Event Created');
- }
 
- public function createStep10(Request $request)
- {
-     $event = $request->session()->get('event');
-     return view('events.create-step10',compact('event', $event));
+   $validatedData = $request->validate([
+     'sideA' => 'nullable',
+     'sideB' => 'nullable',
+     'location' => 'nullable',
+     'category' => 'nullable',
+     'date' => 'nullable',
+     'starttime' => 'nullable',
+     'duration' => 'nullable',
+     'price' => 'nullable',
+     'people' => 'nullable',
+     'registration' => 'nullable',
+     'break' => 'nullable',
+     'registration' => 'nullable',
+     'pricedetails' => 'nullable',
+     'description' => 'nullable',
+      ]);
+   //to add the separte prices for the groups if needed
+   if($validatedData['pricedetails'] == 'nein'){
+     $validatedData = $request->validate([
+         'priceA' => 'nullable',
+         'priceB' => 'nullable',
+     ]);
+   }else{
+   }
+
+   if(empty($request->session()->get('event'))){
+       $event = new Event();
+       $event->fill($validatedData);
+       $request->session()->put('event', $event);
+   }else{
+       $event = $request->session()->get('event');
+       $event->fill($validatedData);
+       $request->session()->put('event', $event);
+   }
+
+     //check if the array is already full. Yes --> store, No--> nothing
+   if (array_search("", $validatedData) !== false){
+     $event->save();
+     return redirect('/events')->with('success', 'Event Created');
+   };
  }
 }

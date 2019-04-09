@@ -24,9 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/search','SearchController');
 
 //Multi-step form
-Route::get('/events/create-step1', 'EventsController@createStep1');
-Route::post('/events/create-step1', 'EventsController@postCreateStep1');
-Route::get('/events/create-step2', 'EventsController@createStep2');
-Route::post('/events/create-step2', 'EventsController@postCreateStep2');
-Route::get('/events/create-step3', 'EventsController@createStep3');
+Route::get('/events/create-step', 'EventsController@createStep');
+Route::post('/events/create-step', 'EventsController@postCreateStep');
 Route::post('/events/store', 'EventsController@store');
