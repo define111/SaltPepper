@@ -140,4 +140,10 @@ class EventsController extends Controller
    $event->save();
    return redirect('/events')->with('success', 'Event Created');
  }
+
+ public function createStep10(Request $request)
+ {
+     $event = $request->session()->get('event');
+     return view('events.create-step10',compact('event', $event));
+ }
 }

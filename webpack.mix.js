@@ -18,4 +18,5 @@ mix.js('resources/js/app.js', 'public/js')
    .copy('node_modules/clockpicker/dist/bootstrap-clockpicker.min.css', 'public/css')
    .js('resources/js/create-event.js', 'public/js')
    .js('resources/js/autocomplete_address.js', 'public/js')
+   .js('resources/js/multi_step.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
