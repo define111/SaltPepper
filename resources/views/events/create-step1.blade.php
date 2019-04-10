@@ -136,7 +136,7 @@
                 <input class="form-control" readonly="readonly" name="profit" type="number" value="" id="profit">
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">Weiter</button>
+            <button id="Btn" type="submit" class="btn btn-primary">Weiter</button>
           </fieldset>
           </form>
         </div>
@@ -147,5 +147,6 @@
 
 <script src={{ asset('js/create-event.js') }}></script>
 <script src={{ asset('js/autocomplete_address.js') }}></script>
+<script src={{ asset('js/multi_step.js') }}></script>
 
 @endsection
