@@ -147,4 +147,5 @@
 
 <script src={{ asset('js/create-event.js') }}></script>
 <script src={{ asset('js/autocomplete_address.js') }}></script>
+
 @endsection

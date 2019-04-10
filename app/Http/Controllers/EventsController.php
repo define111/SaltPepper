@@ -95,7 +95,7 @@ class EventsController extends Controller
            return view('events.create-step2',compact('event', $event));
        }
        /**
-      * Post Request to store step1 info in session
+      * Post Request to store step1 info in session if go forward
       *
       * @param  \Illuminate\Http\Request  $request
       * @return \Illuminate\Http\Response
@@ -110,6 +110,23 @@ class EventsController extends Controller
         $request->session()->put('event', $event);
         return redirect('/events/create-step3');
         }
+
+        /**
+       * Post Request to store step1 info in session if go back
+       *
+       * @param  \Illuminate\Http\Request  $request
+       * @return \Illuminate\Http\Response
+       */
+        public function postCreateStep2back(Request $request)
+        {
+        $event = $request->session()->get('event');
+        $validatedData = $request->validate([
+           'description' => 'required',
+         ]);
+         $event->description = $validatedData['description'];
+         $request->session()->put('event', $event);
+         return redirect('/events/create-step1');
+         }
 
          /**
      * Show the Product Review page

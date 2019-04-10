@@ -28,5 +28,7 @@ Route::get('/events/create-step1', 'EventsController@createStep1');
 Route::post('/events/create-step1', 'EventsController@postCreateStep1');
 Route::get('/events/create-step2', 'EventsController@createStep2');
 Route::post('/events/create-step2', 'EventsController@postCreateStep2');
+Route::get('/events/create-step2back', 'EventsController@createStep2');
+Route::post('/events/create-step2back', 'EventsController@postCreateStep2back');
 Route::get('/events/create-step3', 'EventsController@createStep3');
 Route::post('/events/store', 'EventsController@store');
