@@ -121,18 +121,7 @@ class EventsController extends Controller
             }
         }
 
-
-       /**
-        * Show the step 2 Form for creating a new event.
-        *
-        * @return \Illuminate\Http\Response
-        */
-       public function createStep2(Request $request)
-       {
-           $event = $request->session()->get('event');
-           return view('events.create-step2',compact('event', $event));
-       }
-       /**
+        /**
       * Post Request to store step1 info in session
       *
       * @param  \Illuminate\Http\Request  $request
@@ -146,8 +135,20 @@ class EventsController extends Controller
         ]);
         $event->description = $validatedData['description'];
         $request->session()->put('event', $event);
-        return redirect('/events/create-step3');
         }
+
+
+       /**
+        * Show the step 2 Form for creating a new event.
+        *
+        * @return \Illuminate\Http\Response
+        */
+       public function createStep2(Request $request)
+       {
+           $event = $request->session()->get('event');
+           return view('events.create-step2',compact('event', $event));
+       }
+      
 
          /**
      * Show the Product Review page

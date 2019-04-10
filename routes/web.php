@@ -27,4 +27,5 @@ Route::post('/search','SearchController');
 Route::get('/events/create-step', 'EventsController@createStep');
 Route::post('/events/create-step', 'EventsController@postCreateStep');
 Route::post('/events/create-step1', 'EventsController@postCreateStep1');
+Route::post('/events/create-step2', 'EventsController@postCreateStep2');
 Route::post('/events/store', 'EventsController@store');

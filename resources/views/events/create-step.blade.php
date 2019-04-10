@@ -234,7 +234,7 @@
           </fieldset>
           <div style="overflow:auto;">
             <div style="float:right;">
-              <button type="submit" class="btn btn-primary tabBtn" id="prevBtn" onclick="nextPrev(-1)">Zurück</button>
+              <a type="submit" class="btn btn-primary tabBtn" id="prevBtn" onclick="nextPrev(-1)">Zurück</a>
               <a type="submit" class="btn btn-primary tabBtn" id="nextBtn" onclick="nextPrev(1)">Weiter</a>
             </div>
           </div>

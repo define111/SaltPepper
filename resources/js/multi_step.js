@@ -10,7 +10,7 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
-    document.getElementById('regForm').action = 'somethingelse';
+    document.getElementById('regForm').action = '/events/create-step2';
   }
   if (n == (x.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Submit";
