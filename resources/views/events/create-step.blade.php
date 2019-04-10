@@ -22,7 +22,7 @@
       <div class="card">
         <div class="card-header">{{ __('Create event') }}</div>
         <div class="card-body">
-          <form 'action'='EventsController@store', 'method'='POST', 'enctype'='multipart/form-data', 'autocomplete'="off" id="regForm">
+          <form 'action'='/events/create-step1', 'method'='POST', 'enctype'='multipart/form-data', 'autocomplete'="off" id="regForm">
             @csrf
             <fieldset>
             <!-- One "tab" for each step in the form: -->
@@ -235,7 +235,7 @@
           <div style="overflow:auto;">
             <div style="float:right;">
               <button type="submit" class="btn btn-primary tabBtn" id="prevBtn" onclick="nextPrev(-1)">Zurück</button>
-              <button type="submit" class="btn btn-primary tabBtn" id="nextBtn" onclick="nextPrev(1)">Weiter</button>
+              <a type="submit" class="btn btn-primary tabBtn" id="nextBtn" onclick="nextPrev(1)">Weiter</a>
             </div>
           </div>
           <!-- Circles which indicates the steps of the form: -->

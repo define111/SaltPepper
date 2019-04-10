@@ -83,6 +83,44 @@ class EventsController extends Controller
            return redirect('/events/create-step2');
            // print_r ($event);
        }
+       public function postCreateStep1(Request $request)
+      {
+      $validatedData = $request->validate([
+        'sideA' => 'required',
+        'sideB' => 'required',
+        'location' => 'required',
+        'category' => 'required',
+        'date' => 'required',
+        'starttime' => 'required',
+        'duration' => 'required',
+        'price' => 'required',
+        'people' => 'required',
+        'registration' => 'required',
+        'break' => 'required',
+        'registration' => 'required',
+        'pricedetails' => 'required',
+         ]);
+      //to add the separte prices for the groups if needed
+      if($validatedData['pricedetails'] == 'nein'){
+        $validatedData = $request->validate([
+            'priceA' => 'required',
+            'priceB' => 'required',
+        ]);
+      }else{
+      }
+            $validatedData['date'] = strtotime($request->input('date') . " " . $request->input('starttime') . ":00");
+            unset($validatedData['starttime']);
+            if(empty($request->session()->get('event'))){
+                $event = new Event();
+                $event->fill($validatedData);
+                $request->session()->put('event', $event);
+            }else{
+                $event = $request->session()->get('event');
+                $event->fill($validatedData);
+                $request->session()->put('event', $event);
+            }
+        }
+
 
        /**
         * Show the step 2 Form for creating a new event.
