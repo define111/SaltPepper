@@ -106,6 +106,7 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
+    document.getElementById('regForm').action = 'somethingelse';
   }
 
   if (n == x.length - 1) {
