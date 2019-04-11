@@ -139,6 +139,13 @@ class EventsController extends Controller
             return view('events.create-step3',compact('event',$event));
         }
 
+        public function postcreateStep3back(Request $request)
+        {
+            $event = $request->session()->get('event');
+            $request->session()->put('event', $event);
+            return redirect('/events/create-step2');
+        }
+
         /**
    * Show the Product Review page
    *

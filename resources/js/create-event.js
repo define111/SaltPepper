@@ -1,25 +1,40 @@
 
-// Calculate the data
-document.getElementById("people").addEventListener("change", function() {
-var theParent = document.querySelector("#eventData");
-theParent.addEventListener("change", calculateEndtime, false);
+// Calculate the data for the options
+document.getElementById('endDateDiv').style.display = "none";
+var theParent = document.querySelector("#toCalc");
+$('#toCalc').on("change", calculateEndtime);
 
 function calculateEndtime(e) {
-  var startdateDoc = document.getElementById("date").value;
+  var startdateDoc = document.getElementById("startdate").value;
   var starttimeDoc = document.getElementById("starttime").value;
-  var startdate = startdateDoc.concat('T', starttimeDoc,':00');
-  var start = new Date(startdate);
+  var startdatestring = startdateDoc.split(".");
+  var starttimestring = starttimeDoc.split(":");
+  var startdateDocformat = startdatestring[2].concat("-",startdatestring[1],"-",startdatestring[0]);
+  var startdate = new Date(startdatestring[2], startdatestring[1], startdatestring[0],  starttimestring[0], starttimestring[1],'00');
   var numberOfPeople = Number(document.getElementById("people").value);
   var durationOfDate = Number(document.getElementById("duration").value);
   var durationOfDates = durationOfDate*numberOfPeople;
-  var endtime = start.setMinutes(start.getMinutes()+durationOfDates);
-  var endtimeDoc = new Date (endtime);
-  document.getElementById('enddate').value = endtimeDoc.toISOString().split('T')[0];
-  ('yyyy-MM-dd',{year: 'numeric', month: '2-digit', day: '2-digit'});
-  document.getElementById('endtime').value = endtimeDoc.toLocaleString('de-DE',{hour: 'numeric', minute: 'numeric'});
-  e.stopPropagation();
+  var endtimeCalc = startdate.setMinutes(startdate.getMinutes()+durationOfDates);
+  var endtime = new Date (endtimeCalc);
+  var endtimeDocMin=endtime.getMinutes();
+  var endtimeDocHrs=endtime.getHours();
+  var endtimeDocDay=endtime.getDate().toString();
+  var endtimeDocMonth=endtime.getMonth().toString();
+  var endtimeDocYear=endtime.getFullYear().toString();
+  if (endtimeDocDay < 10) {
+  endtimeDocDay = '0' + endtimeDocDay;
+  }
+  if (endtimeDocMonth < 10) {
+    endtimeDocMonth = '0' + endtimeDocMonth;
+  }
+  var endtimeDoc=endtimeDocHrs+":"+endtimeDocMin;
+  var enddateDoc=endtimeDocYear.concat("-",endtimeDocMonth,"-",endtimeDocDay);
+  document.getElementById('endtime').value = endtimeDoc;
+  if (!enddateDoc == startdateDocformat) {
+    document.getElementById('enddate').value = enddateDoc;
+  } else {
+  }
 };
-});
 
 document.getElementById("price").addEventListener("change", function() {
 var theParent = document.querySelector("#eventData");
@@ -115,12 +130,16 @@ priceB.innerHTML = 'Preis für' + sideB + ' (Euro)';
   });
 
   //for the datepicker
-  $( function() {
-    $( "#datepicker" ).datepicker({dateFormat: 'dd.mm.yy'});
-  } );
+    $("#startdate").datepicker(
+      {dateFormat: 'dd.mm.yy'},
+      {onSelect: function() {$(this).change()}}
+    );
 
 //for the clockpicker
-$('.clockpicker').clockpicker({
-  autoclose: true,
-  default: 'now'
+var input = $('.clockpicker');
+input.clockpicker({
+    autoclose: true,
+    afterDone: function() {
+          input.trigger("change");
+    }
 });
