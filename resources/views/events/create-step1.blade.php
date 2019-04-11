@@ -93,7 +93,7 @@
                   </div>
                   <div class="col-md-5 mb-3">
                     <label for="break">Pause (Min)</label>
-                    <input class="form-control" name="break" type="number" value="@if(empty($event->break)){{'15'}}@else{{$event->break}}@endif" id="break">
+                    <input class="form-control" name="break" type="number" value="@if(empty($event->break)){{'10'}}@else{{$event->break}}@endif" id="break">
                   </div>
                 </div>
 
@@ -109,11 +109,11 @@
                 <div class="form-row preisdetail">
                   <div class="col-md-4 mb-3">
                     <label id="labelpriceA" for="priceA"></label>
-                    <input class="form-control" name="priceA" type="number" value="" id="priceA">
+                    <input class="form-control" name="priceA" type="number" value="15" id="priceA">
                   </div>
                   <div class="col-md-4 mb-3">
                     <label id="labelpriceB" for="priceB">Preis Gruppe B (Euro)</label>
-                    <input class="form-control" name="priceB" type="number" value="" id="priceB">
+                    <input class="form-control" name="priceB" type="number" value="25" id="priceB">
                   </div>
                 </div>
               </div>
@@ -134,7 +134,7 @@
                 <input class="form-control" readonly="readonly" name="endtime" type="time" value="" id="endtime">
               </div>
               <div class="col-md-4 mb-3">
-                <label for="profit">Dein Gewinn</label>
+                <label for="profit">Dein Gewinn (Euro)</label>
                 <input class="form-control" readonly="readonly" name="profit" type="number" value="" id="profit">
               </div>
             </div>

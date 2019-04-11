@@ -93,9 +93,8 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Calculate the data for the options
+// Calculate the endtime and enddate
 document.getElementById('endDateDiv').style.display = "none";
-var theParent = document.querySelector("#toCalc");
 $('#toCalc').on("change", calculateEndtime);
 
 function calculateEndtime(e) {
@@ -107,8 +106,10 @@ function calculateEndtime(e) {
   var startdate = new Date(startdatestring[2], startdatestring[1], startdatestring[0], starttimestring[0], starttimestring[1], '00');
   var numberOfPeople = Number(document.getElementById("people").value);
   var durationOfDate = Number(document.getElementById("duration").value);
-  var durationOfDates = durationOfDate * numberOfPeople;
-  var endtimeCalc = startdate.setMinutes(startdate.getMinutes() + durationOfDates);
+  var breakForRelax = Number(document.getElementById("break").value);
+  var registration = Number(document.getElementById("registration").value);
+  var durationOfbizDate = durationOfDate * numberOfPeople + breakForRelax + registration;
+  var endtimeCalc = startdate.setMinutes(startdate.getMinutes() + durationOfbizDate);
   var endtime = new Date(endtimeCalc);
   var endtimeDocMin = endtime.getMinutes();
   var endtimeDocHrs = endtime.getHours();
@@ -133,22 +134,30 @@ function calculateEndtime(e) {
   } else {}
 }
 
-;
-document.getElementById("price").addEventListener("change", function () {
-  var theParent = document.querySelector("#eventData");
-  theParent.addEventListener("change", calculateEndtime, false);
+; // Calculate the profit
 
-  function calculateEndtime(e) {
-    var numberOfPeople = Number(document.getElementById("people").value);
+calculateProfit();
+$('#toCalc').on("change", calculateProfit());
+
+function calculateProfit() {
+  var numberOfPeople = Number(document.getElementById("people").value);
+  var percentage = 0.8;
+
+  if (document.getElementById("preisdetails").value == "nein") {
     var price = Number(document.getElementById("price").value);
-    var percentage = 0.85;
-    var profit = 2 * percentage * numberOfPeople * price;
-    document.getElementById('profit').value = profit;
-    e.stopPropagation();
+    var profit = percentage * numberOfPeople * 2 * price;
+  } else {
+    var priceA = Number(document.getElementById("priceA").value);
+    var priceB = Number(document.getElementById("priceB").value);
+    var profit = percentage * numberOfPeople * (priceA + priceB);
   }
 
   ;
-}); // function to close and open price details
+  document.getElementById('profit').value = profit;
+}
+
+;
+document.getElementById("price").addEventListener("change", calculateProfit()); // function to close and open price details
 
 function preisdetails() {
   detail = document.querySelector(".preisdetail");
