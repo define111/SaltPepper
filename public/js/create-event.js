@@ -95,6 +95,7 @@
 
 // Calculate the endtime and enddate
 document.getElementById('endDateDiv').style.display = "none";
+calculateEndtime;
 $('#toCalc').on("change", calculateEndtime);
 
 function calculateEndtime(e) {
@@ -167,13 +168,12 @@ function preisdetails() {
     detail.style.display = "";
   } else {
     detail.style.display = "none";
-  } // The function returns the product of p1 and p2
-
+  }
 } // Create a collapsible part (1) and choose different prices for the two groups (2)
 // 1
+// document.querySelector(".content").style.display = "none";
 
 
-document.querySelector(".content").style.display = "none";
 var coll = document.getElementsByClassName("collapsible"); // 2
 
 var detail = document.querySelector(".preisdetail");
@@ -183,10 +183,12 @@ coll[0].addEventListener("click", function () {
   this.classList.toggle("active");
   var content = this.nextElementSibling;
 
-  if (content.style.display === "none") {
-    content.style.display = "";
-  } else {
+  if (content.style.display === "block") {
     content.style.display = "none";
+    this.childNodes[3].childNodes[1].innerHTML = "Zusatzoptionen einblenden";
+  } else {
+    content.style.display = "block";
+    this.childNodes[3].childNodes[1].innerHTML = "Zusatzoptionen ausblenden";
   }
 
   ; // 2
@@ -195,15 +197,15 @@ coll[0].addEventListener("click", function () {
 }); // Create a possibility to choose different prices for the two groups
 
 $("#preisdetails").change(function () {
-  preisdetails();
-}); //Change the label for the two prices
+  preisdetails(); //Change the label for the two prices
 
-var priceA = document.getElementById("labelpriceA");
-var priceB = document.getElementById("labelpriceB");
-var sideA = document.getElementsByName("sideA")[0].value;
-var sideB = document.getElementsByName("sideB")[0].value;
-priceA.innerHTML = 'Preis für' + sideA + ' (Euro)';
-priceB.innerHTML = 'Preis für' + sideB + ' (Euro)'; // for the address autocompleted
+  var priceA = document.getElementById("labelpriceA");
+  var priceB = document.getElementById("labelpriceB");
+  var sideA = document.getElementsByName("sideA")[0].value;
+  var sideB = document.getElementsByName("sideB")[0].value;
+  priceA.innerHTML = 'Preis für ' + sideA + ' (Euro)';
+  priceB.innerHTML = 'Preis für ' + sideB + ' (Euro)';
+}); // for the address autocompleted
 
 var engine = new PhotonAddressEngine({
   lang: 'de',

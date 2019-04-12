@@ -1,7 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/autocomplete_address.js": "/js/autocomplete_address.js",
     "/js/create-event.js": "/js/create-event.js",
     "/js/multi_step.js": "/js/multi_step.js",
     "/js/typeahead.bundle.js": "/js/typeahead.bundle.js",
