@@ -51,7 +51,7 @@ class EventsController extends Controller
        'sideB' => 'required',
        'location' => 'required',
        'category' => 'required',
-       'date' => 'required',
+       'startdate' => 'required',
        'starttime' => 'required',
        'duration' => 'required',
        'price' => 'required',
