@@ -10,37 +10,31 @@
         <div class="card-body">
           <form id="regForm" method="POST" action="/events/create-step2" accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off">
           @csrf
-          </fieldset>
-            <legend class='h5'>Hintergrundsfoto</legend>
-            <div class="form-group row">
-              <div class="col-lg-auto">
-                <input name="background_image" type="file">
+          <div class="form-group row">
+              <label for="background_image" class="col-md-4 col-form-label text-md-right">Hintergrundsfoto</label>
+
+              <div class="col-md-6">
+                <input name="background_image" type="file" autofocus>
               </div>
-            </div>
-            <legend class='h5'>Beschreibung</legend>
-            <div class="form-group row">
-              <div class="col-lg-auto">
-                <textarea id="article-ckeditor" class="form-control" name="description" cols="50" rows="10"
-                placeholder="Beschreibe die Teilnehmergruppen so genau, wie möglich. Erkläre den Ablauf vom Event."
-                >@if(isset($event->description)) {{$event->description}}@else{{''}}@endif
-                </textarea>
+          </div>
+
+          <div class="form-group row">
+              <label for="participants" class="col-md-4 col-form-label text-md-right">Die Teilnehmer</label>
+
+              <div class="col-md-6">
+                <textarea class="form-control" placeholder="Beschreibe die Teilnehmer vom Event möglichst genau" name="participants" type="text" value="@if(isset($event->participants)) {{$event->participants}}@else{{''}}@endif"></textarea>
               </div>
-            </div>
-            <legend class='h5'>Vorschlag</legend>
-            <div class="form-group row">
-              <div class="col-lg-auto">
-                <textarea id="article-ckeditor" class="form-control" name="description" cols="70" rows="10" readonly="readonly"
-                >Biz ​​Dating ist der perfekte Weg, um bis zu {{$event->people}} potentielle Geschäftspartner an einem Abend zu treffen. Wenn Sie ankommen, werden Sie von Ihrem Biz Dater-Gastgeber begrüßt und angemeldet.
-                  Die Kunden bleiben normalerweise an den Tischen sitzen, während die Unternehmer alle {{$event->duration}} Minuten rotieren, nachdem die Klingel geklingelt hat.
-                  Bringen Sie ein Notitzblock zu der bizDate mit und machen Sie sich Notitzen über die interessanten Dates.
-                  Nach der Veranstaltung bekommen Sie eine Email mit dem Link zur Auswertung und Bewertung von dem bizDate.
-                  Bei einem Match können Sie Ihre potentiellen Geschäftspartner über unser sicheres Kommunikationssystem kontaktieren um weiter Details abzuklären. Sie können dann auch Ihre Kontakdaten selber austauschen.
-                </textarea>
+          </div>
+
+          <div class="form-group row">
+              <label for="additional" class="col-md-4 col-form-label text-md-right">Weitere Angaben</label>
+
+              <div class="col-md-6">
+                <textarea class="form-control" placeholder="Gibt es noch etwas, was die Teilnehmer wissen sollen?" name="additional" type="text" value="@if(isset($event->additional)) {{$event->additional}}@else{{''}}@endif"></textarea>
               </div>
-            </div>
+          </div>
             <button type="submit" class="btn btn-primary" onclick="nextPrev(1)">Zurück</button>
             <button type="submit" class="btn btn-primary">Weiter</button>
-          </fieldset>
           </form>
         </div>
       </div>
@@ -48,10 +42,5 @@
   </div>
 </div>
 
-{{-- Script for ck-editor --}}
-<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace( 'article-ckeditor' );
-</script>
 <script src={{ asset('js/multi_step.js') }}></script>
 @endsection
