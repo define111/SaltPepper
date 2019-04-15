@@ -33,34 +33,45 @@
             </div>
 
             <div class="form-group row">
-                <label for="managerSurname" class="col-md-4 col-form-label text-md-right">Dein Nachname</label>
+                <label for="managerEmail" class="col-md-4 col-form-label text-md-right">Deine Email</label>
 
                 <div class="col-md-4">
-                  <input class="form-control" placeholder="" name="managerSurname" type="text" value="@if(isset($event->managerSurname)) {{$event->managerSurname}}@else{{''}}@endif">
+                  <input class="form-control" placeholder="Für die Teilnehmer" name="managerEmail" type="text" value="@if(isset($event->managerEmail)) {{$event->managerEmail}}@else{{''}}@endif">
                 </div>
+                <fieldset disabled>
                 <div class="col-sm-4">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="showSurname">
-                    <label class="form-check-label" for="showSurname">
+                    <input class="form-check-input" type="checkbox" name="showEmail">
+                    <label class="form-check-label" for="showEmail">
                       Sichtbar
                     </label>
                   </div>
                 </div>
+                </fieldset>
             </div>
             <div class="form-group row">
-                <label for="managerEmail" class="col-md-4 col-form-label text-md-right">Deine Email</label>
+                <label for="paymentOpt" class="col-md-4 col-form-label text-md-right">Dein Gehalt auf</label>
 
-                <div class="col-md-4">
-                  <input class="form-control" placeholder="Für die Rechnung" name="managerEmail" type="text" value="@if(isset($event->managerEmail)) {{$event->managerEmail}}@else{{''}}@endif">
+                <div class="col-md-6">
+                  <select class="form-control" id="paymentOpt" name="paymentOpt">
+                    <option value="ja" @if(empty($event->paymentOpt) || $event->paymentOpt == 'Paypal')selected @else @endif>Paypal</option>
+                    <option value="nein" @if(isset($event->paymentOpt) && $event->paymentOpt == 'Überweisung')selected @else @endif>Überweisung</option>
+                  </select>
                 </div>
             </div>
+            <div class="Paypal">
+          
             <div class="form-group row">
-                <label for="managerAddress" class="col-md-4 col-form-label text-md-right">Deine Adresse</label>
+                <label for="account" class="col-md-4 col-form-label text-md-right">Account erstellen</label>
 
-                <div class="col-md-4">
-                  <input class="form-control" placeholder="Für die Rechnung" name="managerAddress" type="text" value="@if(isset($event->managerAddress)) {{$event->managerAddress}}@else{{''}}@endif">
+                <div class="col-md-6">
+                  <select class="form-control" id="account" name="account">
+                    <option value="ja" @if(empty($event->account) || $event->account == 'ja')selected @else @endif>Ja</option>
+                    <option value="nein" @if(isset($event->account) && $event->account == 'nein')selected @else @endif>Nein</option>
+                  </select>
                 </div>
             </div>
+
             <button type="submit" class="btn btn-primary" onclick="nextPrev(2)">Zurück</button>
             <button type="submit" class="btn_secondary btn">bizDate erstellen</button>
 
