@@ -11,47 +11,59 @@
         <div class="card-body">
           <form id="regForm" method="POST" action="/events/store" accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off">
             @csrf
-          <fieldset>
-              <legend class='h5'>2. Die Details</legend>
-              <table class="table">
-                  <tr>
-                      <td>Titel:</td>
-                      <td><strong>@if(isset($event->sideA)) {{$event->sideA}}@else{{''}}@endif treffen auf @if(isset($event->sideB)) {{$event->sideB}}@else{{''}}@endif </strong></td>
-                  </tr>
-                  <tr>
-                      <td>Ort:</td>
-                      <td><strong>@if(isset($event->location)) {{$event->location}}@else{{''}}@endif</strong></td>
-                  </tr>
-                  <tr>
-                      <td>Kategorie:</td>
-                      <td><strong>@if(isset($event->category)) {{$event->category}}@else{{''}}@endif</strong></td>
-                  </tr>
-                  <tr>
-                      <td>Datum:</td>
-                      <td><strong>@if(isset($event->date)){{$event->date->format('d.m.Y')}}@else{{''}}@endif</strong></td>
-                  </tr>
-                  <tr>
-                      <td>Startzeit:</td>
-                      <td><strong>@if(isset($event->date)){{$event->date->format('H:i')}}@else{{''}}@endif</strong></td>
-                  </tr>
-                  <tr>
-                      <td>Personeanzahl:</td>
-                      <td><strong>@if(isset($event->people)){{$event->people}}@else{{''}}@endif</strong></td>
-                  </tr>
-                  <tr>
-                      <td>Beschreibung:</td>
-                      <td><strong>@if(isset($event->description)){!!$event->description!!}@else{{''}}@endif</strong></td>
-                  </tr>
+            <div class="form-group row">
 
+            </div>
+            <div class="form-group row">
+                <label for="managerName" class="col-md-4 col-form-label text-md-right">Dein Vorname</label>
 
-                  {{-- <tr>
-                      <td>Product Image:</td>
-                      <td><strong><img alt="Product Image" src="/storage/productimg/{{$product->productImg}}"/></strong></td>
-                  </tr> --}}
-              </table>
-              <button type="submit" class="btn btn-primary" onclick="nextPrev(2)">Daten ändern</button>
-              <button type="submit" class="btn_secondary btn">bizDate erstellen</button>
-          </fieldset>
+                <div class="col-md-4">
+                  <input class="form-control" placeholder="" name="manager" type="text" value="@if(isset($event->managerName)) {{$event->managerName}}@else{{''}}@endif">
+                </div>
+                <fieldset disabled>
+                <div class="col-sm-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" checked="checked" name="showName">
+                    <label class="form-check-label" for="showName">
+                      Sichtbar
+                    </label>
+                  </div>
+                </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group row">
+                <label for="managerSurname" class="col-md-4 col-form-label text-md-right">Dein Nachname</label>
+
+                <div class="col-md-4">
+                  <input class="form-control" placeholder="" name="managerSurname" type="text" value="@if(isset($event->managerSurname)) {{$event->managerSurname}}@else{{''}}@endif">
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="showSurname">
+                    <label class="form-check-label" for="showSurname">
+                      Sichtbar
+                    </label>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="managerEmail" class="col-md-4 col-form-label text-md-right">Deine Email</label>
+
+                <div class="col-md-4">
+                  <input class="form-control" placeholder="Für die Rechnung" name="managerEmail" type="text" value="@if(isset($event->managerEmail)) {{$event->managerEmail}}@else{{''}}@endif">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="managerAddress" class="col-md-4 col-form-label text-md-right">Deine Adresse</label>
+
+                <div class="col-md-4">
+                  <input class="form-control" placeholder="Für die Rechnung" name="managerAddress" type="text" value="@if(isset($event->managerAddress)) {{$event->managerAddress}}@else{{''}}@endif">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="nextPrev(2)">Zurück</button>
+            <button type="submit" class="btn_secondary btn">bizDate erstellen</button>
+
           </form>
         </div>
       </div>
