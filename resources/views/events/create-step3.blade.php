@@ -7,7 +7,18 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Create event') }}</div>
+        <div class="card-header">
+          <div class="row">
+            <label for="labelCard" class="col-md-4 col-form-label text-md-left">Create event</label>
+
+            <!-- Circles which indicates the steps of the form: -->
+            <div class="col-md-6">
+              <span class="step align-bottom"></span>
+              <span class="step align-bottom"></span>
+              <span class="step active align-bottom"></span>
+            </div>
+          </div>
+        </div>
         <div class="card-body">
           <form id="regForm" method="POST" action="/events/store" accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off">
             @csrf
@@ -60,7 +71,7 @@
                 </div>
             </div>
             <div class="Paypal">
-          
+
             <div class="form-group row">
                 <label for="account" class="col-md-4 col-form-label text-md-right">Account erstellen</label>
 

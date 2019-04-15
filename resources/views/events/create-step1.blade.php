@@ -18,7 +18,18 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Create event') }}</div>
+        <div class="card-header">
+          <div class="row">
+            <label for="labelCard" class="col-md-4 col-form-label text-md-left">Create event</label>
+
+            <!-- Circles which indicates the steps of the form: -->
+            <div class="col-md-6">
+              <span class="step active align-bottom"></span>
+              <span class="step align-bottom"></span>
+              <span class="step align-bottom"></span>
+            </div>
+          </div>
+        </div>
         <div class="card-body">
           <form method="POST" action="/events/create-step1" accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off">
             @csrf
@@ -26,7 +37,7 @@
                 <label for="sideA" class="col-md-4 col-form-label text-md-right">Teilnehmergruppe A</label>
 
                 <div class="col-md-6">
-                  <input class="form-control" placeholder="Die Kunden" name="sideA" type="text" value="@if(isset($event->sideA)) {{$event->sideA}}@else{{''}}@endif" autofocus>
+                  <input class="form-control" placeholder="Die Kunden" name="sideA" type="text" value="{{$event->sideA ? $event->sideA : ''}}" autofocus>
                 </div>
             </div>
 
@@ -34,7 +45,7 @@
                 <label for="sideB" class="col-md-4 col-form-label text-md-right">Teilnehmergruppe B</label>
 
                 <div class="col-md-6">
-                    <input class="form-control" id="Test" placeholder="Die Unternhemer" name="sideB" type="text" value="@if(isset($event->sideB)) {{$event->sideB}}@else{{''}}@endif">
+                    <input class="form-control" id="Test" placeholder="Die Unternhemer" name="sideB" type="text" value="{{$event->sideB ? $event->sideB : ''}}">
                 </div>
             </div>
 
@@ -42,7 +53,7 @@
                 <label for="location" class="col-md-4 col-form-label text-md-right">Ort oder Adresse</label>
 
                 <div class="col-md-6">
-                    <input class="form-control" placeholder="Schreib hier den Namen" id="inpAddress" name="location" type="text" value="@if(isset($event->location)) {{$event->location}}@else{{''}}@endif">
+                    <input class="form-control" placeholder="Schreib hier den Namen" id="inpAddress" name="location" type="text" value="{{$event->location ? $event->location : ''}}">
                 </div>
             </div>
 
@@ -68,10 +79,10 @@
                   <div class="col-md-6">
                     <div class="form-row">
                       <div class="col-md-6">
-                        <input class="form-control" id="startdate" name="startdate" type="text" value="@if(isset($event->date)){{$event->date->format('d.m.Y')}}@else{{''}}@endif">
+                        <input class="form-control" id="startdate" name="startdate" type="text" value="{{$event->date ? $event->date->format('d.m.Y') : ''}}">
                       </div>
                       <div class="col-md-6">
-                        <input class="clockpicker form-control" id="starttime" name="starttime" type="time" value="@if(isset($event->date)){{$event->date->format('H:i')}}@else{{''}}@endif">
+                        <input class="clockpicker form-control" id="starttime" name="starttime" type="time" value="{{$event->date ? $event->date->format('H:i') : ''}}">
                       </div>
                     </div>
                   </div>
@@ -92,7 +103,7 @@
                     <label for="duration" class="col-md-4 col-form-label text-md-right">Zeit/Date (Min)</label>
 
                     <div class="col-md-6">
-                        <input class="form-control" name="duration" type="number" value="@if(empty($event->duration)){{'4'}}@else{{$event->duration}}@endif" id="duration">
+                        <input class="form-control" name="duration" type="number" value="{{$event->duration ? $event->duration : ''}}" id="duration">
                     </div>
                 </div>
 
@@ -100,7 +111,7 @@
                     <label for="price" class="col-md-4 col-form-label text-md-right">Preis (Euro)</label>
 
                     <div class="col-md-6">
-                        <input class="form-control" name="price" type="number" value="@if(empty($event->price)){{'15'}}@else{{$event->price}}@endif" id="price">
+                        <input class="form-control" name="price" type="number" value="{{$event->price ? $event->price : ''}}" id="price">
                     </div>
                 </div>
 
@@ -108,7 +119,7 @@
                     <label for="email" class="col-md-4 col-form-label text-md-right">Personen / Gruppe</label>
 
                     <div class="col-md-6">
-                        <input class="form-control" name="people" type="number" value="@if(empty($event->people)){{'20'}}@else{{$event->people}}@endif" id="people">
+                        <input class="form-control" name="people" type="number" value="{{$event->people ? $event->people : '20'}}" id="people">
                     </div>
                 </div>
 
@@ -116,7 +127,7 @@
                     <label for="email" class="col-md-4 col-form-label text-md-right">Registrierung (min)</label>
 
                     <div class="col-md-6">
-                        <input class="form-control" name="registration" type="number" value="@if(empty($event->registration)){{'15'}}@else{{$event->registration}}@endif" id="registration">
+                        <input class="form-control" name="registration" type="number" value="{{$event->registration ? $event->registration : '15'}}" id="registration">
                     </div>
                 </div>
 
@@ -124,7 +135,7 @@
                     <label for="break" class="col-md-4 col-form-label text-md-right">Pause (min)</label>
 
                     <div class="col-md-6">
-                        <input class="form-control" name="break" type="number" value="@if(empty($event->break)){{'10'}}@else{{$event->break}}@endif" id="break">
+                        <input class="form-control" name="break" type="number" value="{{$event->break ? $event->break : '10'}}" id="break">
                     </div>
                 </div>
 
@@ -185,7 +196,7 @@
             </div>
 
 
-            <button id="Btn" type="submit" class="btn btn-primary">Weiter</button>
+            <button id="Btn" type="submit" class="btn btn-primary" onclick="StepIndicator(2)">Weiter</button>
           </form>
         </div>
       </div>

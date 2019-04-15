@@ -106,7 +106,7 @@ class EventsController extends Controller
        $validatedData = $request->validate([
           'participants' => 'required',
         ]);
-        $event->description = $validatedData['participants'];
+        $event->participants = $validatedData['participants'];
         $request->session()->put('event', $event);
         return redirect('/events/create-step3');
         }
@@ -121,9 +121,9 @@ class EventsController extends Controller
         {
         $event = $request->session()->get('event');
         $validatedData = $request->validate([
-           'description' => 'required',
+           'participants' => 'required',
          ]);
-         $event->description = $validatedData['description'];
+         $event->participants = $validatedData['participants'];
          $request->session()->put('event', $event);
          return redirect('/events/create-step1');
          }
