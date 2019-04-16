@@ -71,6 +71,7 @@ class EventsController extends Controller
      }
            $validatedData['date'] = strtotime($request->input('date') . " " . $request->input('starttime') . ":00");
            unset($validatedData['starttime']);
+           $validatedData['step1']='finish';
            if(empty($request->session()->get('event'))){
                $event = new Event();
                $event->fill($validatedData);
@@ -106,7 +107,9 @@ class EventsController extends Controller
        $validatedData = $request->validate([
           'participants' => 'required',
         ]);
+        $validatedData['step2']='finish';
         $event->participants = $validatedData['participants'];
+        $event->step2 = $validatedData['step2'];
         $request->session()->put('event', $event);
         return redirect('/events/create-step3');
         }
@@ -123,7 +126,9 @@ class EventsController extends Controller
         $validatedData = $request->validate([
            'participants' => 'required',
          ]);
+         $validatedData['step2']='finish';
          $event->participants = $validatedData['participants'];
+         $event->step2 = $validatedData['step2'];
          $request->session()->put('event', $event);
          return redirect('/events/create-step1');
          }
@@ -142,6 +147,8 @@ class EventsController extends Controller
         public function postcreateStep3back(Request $request)
         {
             $event = $request->session()->get('event');
+            $validatedData['step3']='finish';
+            $event->step3 = $validatedData['step3'];
             $request->session()->put('event', $event);
             return redirect('/events/create-step2');
         }
