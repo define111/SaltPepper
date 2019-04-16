@@ -12,7 +12,7 @@
 
             <!-- Circles which indicates the steps of the form: -->
             <div class="col-md-6">
-              <span class="step align-bottom"></span>
+              <span class="step finish align-bottom"></span>
               <span class="step active align-bottom"></span>
               <span class="step align-bottom"></span>
             </div>
@@ -45,7 +45,7 @@
               </div>
           </div>
             <button type="submit" class="btn btn-primary" onclick="nextPrev(1)">Zurück</button>
-            <button type="submit" class="btn btn-primary" onclick="StepIndicator(3)">Weiter</button>
+            <button type="submit" class="btn btn-primary">Weiter</button>
           </form>
         </div>
       </div>

@@ -95,8 +95,21 @@
 
 // Calculate the endtime and enddate
 document.getElementById('endDateDiv').style.display = "none";
-calculateEndtime;
-$('#toCalc').on("change", calculateEndtime);
+
+if (session_event) {
+  calculate();
+} else {
+  calculateProfit();
+}
+
+$('#toCalc').on("change", calculate);
+
+function calculate(e) {
+  calculateEndtime();
+  calculateProfit();
+}
+
+;
 
 function calculateEndtime(e) {
   var startdateDoc = document.getElementById("startdate").value;
@@ -126,6 +139,14 @@ function calculateEndtime(e) {
     endtimeDocMonth = '0' + endtimeDocMonth;
   }
 
+  if (endtimeDocHrs < 10) {
+    endtimeDocHrs = '0' + endtimeDocHrs;
+  }
+
+  if (endtimeDocMin < 10) {
+    endtimeDocMin = '0' + endtimeDocMin;
+  }
+
   var endtimeDoc = endtimeDocHrs + ":" + endtimeDocMin;
   var enddateDoc = endtimeDocYear.concat("-", endtimeDocMonth, "-", endtimeDocDay);
   document.getElementById('endtime').value = endtimeDoc;
@@ -136,9 +157,6 @@ function calculateEndtime(e) {
 }
 
 ; // Calculate the profit
-
-calculateProfit();
-$('#toCalc').on("change", calculateProfit());
 
 function calculateProfit() {
   var numberOfPeople = Number(document.getElementById("people").value);

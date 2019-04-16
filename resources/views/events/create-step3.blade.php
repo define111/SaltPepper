@@ -13,8 +13,8 @@
 
             <!-- Circles which indicates the steps of the form: -->
             <div class="col-md-6">
-              <span class="step align-bottom"></span>
-              <span class="step align-bottom"></span>
+              <span class="step finish align-bottom"></span>
+              <span class="step finish align-bottom"></span>
               <span class="step active align-bottom"></span>
             </div>
           </div>
