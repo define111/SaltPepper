@@ -6,5 +6,7 @@
     "/js/typeahead.bundle.js": "/js/typeahead.bundle.js",
     "/js/typeahead-address-photon.js": "/js/typeahead-address-photon.js",
     "/js/bootstrap-clockpicker.min.js": "/js/bootstrap-clockpicker.min.js",
+    "/js/jquery.js": "/js/jquery.js",
+    "/js/jquery.pjax.js": "/js/jquery.pjax.js",
     "/css/bootstrap-clockpicker.min.css": "/css/bootstrap-clockpicker.min.css"
 }

@@ -58,12 +58,16 @@
      <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
      <script src="https://d19m59y37dris4.cloudfront.net/directory/1-0/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
      <!-- Magnific Popup - Lightbox for the gallery-->
-     
+     <script src="{{mix('js/jquery.js')}}"></script>
+     <script src="{{mix('js/jquery.pjax.js')}}"></script>
     </head>
     <body style="padding-top: 72px;">
         @include('inc.navbar')
-        @include('inc.messages')
-        @yield('content')
+        <section id="pjax-container">
+          @include('inc.messages')
+          @yield('content')
+        </section>
+        <h5> {{time()}} </h5>
         @include('inc.footer')
       {{-- Script for bootstrap --}}
      <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
@@ -81,5 +85,13 @@
      <script>var basePath = ''</script>
      <!-- Main Theme JS file    -->
      <script src="/js/theme.js"></script>
+     <script type="text/javascript">
+     $(document).ready(function(){
+            if ($.support.pjax) {
+                $.pjax.defaults.timeout = 2000; // time in milliseconds
+                $(document).pjax('a', '#pjax-container');
+            }
+        });
+     </script>
    </body>
 </html>
