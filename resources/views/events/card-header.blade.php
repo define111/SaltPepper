@@ -2,17 +2,6 @@
 
 @section('content')
 
-{{-- For address autocomplete --}}
-<script src="{{mix('js/typeahead.bundle.js')}}"></script>
-<script src="{{mix('js/typeahead-address-photon.js')}}"></script>
-
-{{-- for the clockpicker --}}
-<link href="{{ URL::asset('/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet">
-<script src="{{mix('/js/bootstrap-clockpicker.min.js')}}"></script>
-
-{{-- for the calender --}}
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <div class="container my-5">
   <div class="row justify-content-center">
@@ -30,7 +19,7 @@
             <h6> {{time()}} </h6>
           </div>
         </div>
-        <section id="">
+        <section id="data-pjax-container">
           @yield('content-card')
         </section>
       </div>
@@ -38,10 +27,18 @@
   </div>
 </div>
 
-<script type="text/javascript">
-var session_event='{{$event?$event:''}}';
-</script>
-<script src={{ asset('js/create-event.js') }}></script>
 <script src={{ asset('js/multi_step.js') }}></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+       if ($.support.pjax) {
+           $.pjax.defaults.timeout = 2000; // time in milliseconds
+           $(document).on('submit', 'form', function(event) {
+             // event.preventDefault(); // stop default submit behavior
+             $.pjax.submit(event, '#data-pjax-container')
+           })
+       }
+   });
+</script>
 
 @endsection
