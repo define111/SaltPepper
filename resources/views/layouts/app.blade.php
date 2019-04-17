@@ -67,7 +67,6 @@
           @include('inc.messages')
           @yield('content')
         </section>
-        <h5> {{time()}} </h5>
         @include('inc.footer')
       {{-- Script for bootstrap --}}
      <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
