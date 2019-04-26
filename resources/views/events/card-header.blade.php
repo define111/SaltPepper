@@ -10,13 +10,18 @@
         <div class="card-header">
           <div class="row">
             <label for="labelCard" class="col-md-4 col-form-label text-md-left">Create event</label>
-            <!-- Circles which indicates the steps of the form: -->
-            <div class="col-md-6">
-              <span class="step active align-bottom {{isset($event->step1) ? $event->step1 : ''}}"></span>
-              <span class="step align-bottom {{isset($event->step2) ? $event->step2 : ''}}"></span>
-              <span class="step align-bottom {{isset($event->step3) ? $event->step3 : ''}}"></span>
-            </div>
-            <h6> {{time()}} </h6>
+          </div>
+          <div class="row">
+
+            
+            <ul class="progressbar">
+                <li class="active">Details</li>
+                <li>Beschreibung & Foto</li>
+                <li>Angaben zum Datemanager</li>
+                {{-- mit login erstellen (wie db) Vorteile: Vertrauen von Kunden, schnellere Abwicklung, Profil erstellen --}}
+                <li>Zahlung & Erstellen</li>
+                {{-- wie möchte er seine Zahlung erhalten, Überweisung, Paypal --}}
+            </ul>
           </div>
         </div>
         <section id="data-pjax-container">
