@@ -180,7 +180,7 @@
     </div>
 
 
-    <button id="Btn" type="submit" class="btn btn-primary">Weiter</button>
+    <button id="Btn" type="submit" class="btn btn-primary" onClick=next()>Weiter</button>
   </form>
 </div>
 
