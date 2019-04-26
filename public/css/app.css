@@ -4794,6 +4794,7 @@ input[type=button].btn-block {
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  z-index: 0;
 }
 
 .card-header:first-child {
@@ -10800,11 +10801,11 @@ span.twitter-typeahead {
 
 .progress .progress-track {
   position: absolute;
-  top: 3px;
+  top: 5px;
   width: 100%;
   height: 2px;
   background-color: #dfe3e4;
-  z-index: 0;
+  z-index: -1;
 }
 
 .progress .progress-step {
@@ -10819,12 +10820,12 @@ span.twitter-typeahead {
 }
 
 .progress .progress-step:before {
-  content: "";
+  content: "\F00C";
   display: flex;
   margin: 0 auto;
-  margin-bottom: 6px;
-  width: 7px;
-  height: 7px;
+  margin-bottom: 5px;
+  width: 12px;
+  height: 12px;
   background: #dfe3e4;
   border-radius: 100%;
   color: #fff;
@@ -10833,11 +10834,11 @@ span.twitter-typeahead {
 .progress .progress-step:after {
   content: "";
   position: absolute;
-  top: 6px;
+  top: 5px;
   left: 50%;
   width: 0%;
   transition: width 1s ease-in;
-  height: 5px;
+  height: 3px;
   background: #dfe3e4;
   z-index: -1;
 }
@@ -10857,11 +10858,12 @@ span.twitter-typeahead {
 }
 
 .progress .progress-step.is-complete:before {
-  font-family: FontAwesome;
-  font-size: 10px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 9px;
   color: #fff;
   background: #009900;
-  border: 4px solid transparent;
+  border: 1.5px solid transparent;
 }
 
 .progress .progress-step.is-complete:after {

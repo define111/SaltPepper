@@ -66,8 +66,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" onclick="nextPrev(2)">Zurück</button>
-            <button type="submit" class="btn_secondary btn">bizDate erstellen</button>
+            <button type="submit" class="btn btn-primary" onclick="checkButton(2)">Zurück</button>
+            <button type="submit" class="btn_secondary btn" onclick="checkStep(2)">bizDate erstellen</button>
 
           </form>
         </div>

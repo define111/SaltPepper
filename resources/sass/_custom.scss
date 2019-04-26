@@ -142,11 +142,11 @@ $white: #fff;
   // Background Track
   .progress-track {
     position: absolute;
-    top: 3px;
+    top: 5px;
     width: 100%;
     height: 2px;
     background-color: $grey2;
-    z-index: 0;
+    z-index: -1;
   }
 
   // Each Step on the Progress Bar
@@ -163,12 +163,12 @@ $white: #fff;
 
     // Step's circle in default state
     &:before {
-      content: "";
+      content: "\f00c";
       display: flex;
       margin: 0 auto;
-      margin-bottom: 6px;
-      width: 7px;
-      height: 7px;
+      margin-bottom: 5px;
+      width: 12px;
+      height: 12px;
       background: $grey2;
       border-radius: 100%;
       color: $white;
@@ -178,11 +178,11 @@ $white: #fff;
     &:after {
       content: "";
       position: absolute;
-      top: 6px;
+      top: 5px;
       left: 50%;
       width: 0%;
       transition: width 1s ease-in;
-      height: 5px;
+      height: 3px;
       background: $grey2;
       z-index: -1;
     }
@@ -203,11 +203,12 @@ $white: #fff;
 
       // Step's circle in complete state
       &:before {
-        font-family: FontAwesome;
-        font-size: 10px;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 9px;
         color: $white;
         background: $green;
-        border: 4px solid transparent;
+        border: 1.5px solid transparent;
       }
 
       // Step's progress bar in complete state
@@ -219,6 +220,7 @@ $white: #fff;
     }
   }
 }
+
 
 // Animations --------------------------------------
 // Pulse animation for Step's circle in active state

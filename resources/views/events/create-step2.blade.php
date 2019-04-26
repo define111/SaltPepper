@@ -28,8 +28,8 @@
                 <textarea class="form-control" placeholder="Gibt es noch etwas, was die Teilnehmer wissen sollen?" name="additional" type="text" value="">{{$event->additional ? $event->additional : ''}}</textarea>
               </div>
           </div>
-            <button type="submit" class="btn btn-primary" onclick="nextPrev(1)">Zurück</button>
-            <button type="submit" class="btn btn-primary">Weiter</button>
+            <button type="submit" class="btn btn-primary" onclick="checkButton(1)">Zurück</button>
+            <button type="submit" class="btn btn-primary" onclick="checkStep(1)">Weiter</button>
           </form>
         </div>
 
